@@ -1,0 +1,39 @@
+.state-indicator-circles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+.state-indicator-circle {
+    border: 5px solid rgba(0, 0, 0, 0);
+    border-radius: 50%;
+}
+
+.sic--outer {
+    width: 85vw;
+    height: 85vw;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sic--middle {
+    width: 80vw;
+    height: 80vw;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sic--inner {
+    width: 75vw;
+    height: 75vw;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

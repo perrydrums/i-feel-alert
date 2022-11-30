@@ -30,7 +30,7 @@ export default function StateOfMind({userType}: { userType: string }) {
 
   }, [])
 
-  async function updateStateOfUser(username: string, state: string) {
+  async function updateStateOfUser(state: string) {
     await supabase
       .from('user_state')
       .update({state: state})
@@ -40,20 +40,6 @@ export default function StateOfMind({userType}: { userType: string }) {
   }
 
   const themeClass = stateOfMind === 'unknown' ? '' : `bg--${stateOfMind}`;
-
-  const states = ['red', 'yellow', 'green'];
-  const updateButtons = states.map((s) => {
-    if (s !== stateOfMind) {
-      return (
-        <Button state={stateOfMind}
-                text={s}
-                onClick={() => updateStateOfUser(username, s)}
-                key={`update-${s}`}
-        />
-      )
-    }
-    return null;
-  })
 
   return <div className={'page ' + themeClass}>
     <div className="som-title-container">
@@ -66,10 +52,11 @@ export default function StateOfMind({userType}: { userType: string }) {
       }
 
     </div>
-    <StateIndicator state={stateOfMind}/>
-    {userType === 'sharer'
-      ? <>{updateButtons}</>
-      : <>
+    <StateIndicator state={stateOfMind}
+                    update={userType === 'sharer' ? updateStateOfUser : null}
+    />
+    {userType === 'listener' &&
+      <>
         {(show === 'all' || show === 'signs') &&
           <Button state={stateOfMind}
                   text="How can I help?"

@@ -4,6 +4,8 @@ import Button from "../../atoms/Button";
 import NewSignOrActionForm from "../../organisms/forms/NewSignOrActionForm";
 import {getSignals, getActions} from "../../../helpers/get";
 import {Action, Signal} from "../../../helpers/types";
+import SignalElement from "../../molecules/Signal";
+import ActionElement from "../../molecules/Action";
 
 export default function SignalsAndActions() {
   const [showForm, setShowForm] = React.useState(false);
@@ -20,21 +22,8 @@ export default function SignalsAndActions() {
     });
   }, []);
 
-  // create signals html
-  const signalsHtml = signals.map((signal) =>
-    <div className="signal-preview" key={`signal-${signal.id}`}>
-      <div className="signal__state">{signal.state}</div>
-      <div className="signal__name">{signal.description}</div>
-    </div>
-  );
-
-  // create actions html
-  const actionsHtml = actions.map((action) =>
-    <div className="action-preview" key={`action-${action.id}`}>
-      <div className="signal__state">{action.state}</div>
-      <div className="signal__name">{action.description}</div>
-    </div>
-  );
+  const signalsHtml = signals.map((signal) => <SignalElement signal={signal} key={`signal-${signal.id}`}/>);
+  const actionsHtml = actions.map((action) => <ActionElement action={action} key={`action-${action.id}`}/>);
 
   return (
     <div className="page">

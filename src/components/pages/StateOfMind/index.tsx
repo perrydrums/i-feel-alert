@@ -60,7 +60,7 @@ export default function StateOfMind({userType}: { userType: string }) {
       {userType === 'sharer'
         ? <Title theme={stateOfMind}>I'm feeling</Title>
         : <>
-          <Text theme={stateOfMind}>{user.name}</Text>
+          <Text theme={stateOfMind}>{user.name || '&nbsp;'}</Text>
           <Title theme={stateOfMind}>currently feels</Title>
         </>
       }

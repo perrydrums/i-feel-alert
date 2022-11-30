@@ -21,20 +21,38 @@ export async function getUser(username: string): Promise<UserData> {
   return data ? data[0] : {};
 }
 
-export async function getSignals(username: string): Promise<Signal[]> {
-  const {data} = await supabase
+export async function getSignals(username: string, filter?: { state?: string, internal?: boolean }): Promise<Signal[]> {
+  const query = supabase
     .from('signals')
     .select()
-    .eq('username', username)
+    .eq('username', username);
 
+  if (filter?.state) {
+    query.eq('state', filter.state)
+  }
+
+  if (filter?.internal) {
+    query.eq('internal', filter.internal)
+  }
+
+  const {data} = await query;
   return data ? data : [];
 }
 
-export async function getActions(username: string): Promise<Action[]> {
-  const {data} = await supabase
+export async function getActions(username: string, filter?: { state?: string, internal?: boolean }): Promise<Action[]> {
+  const query = supabase
     .from('actions')
     .select()
-    .eq('username', username)
+    .eq('username', username);
 
+  if (filter?.state) {
+    query.eq('state', filter.state)
+  }
+
+  if (filter?.internal) {
+    query.eq('internal', filter.internal)
+  }
+
+  const {data} = await query;
   return data ? data : [];
 }

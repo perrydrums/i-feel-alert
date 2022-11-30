@@ -4,11 +4,13 @@
     --color-text--yellow: #554715;
     --color-text--green: #38E4AE;
     --color-text--green--lighter: #74FFD3;
+    --color-text--white: #FFFFFF;
 
     --color-bg-red: #9E2B25;
     --color-bg-yellow: #E2C044;
     --color-bg-green: #00A676;
     --color-bg-light-green: #51ab92;
+    --color-bg-black: #0d1116;
 
     --color-border--red: #FF5148;
     --color-border--yellow: #FFD950;

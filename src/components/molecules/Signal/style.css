@@ -1,9 +1,4 @@
-body {
-    background-color: var(--color-bg-black);
-    color: var(--color-text--white);
-}
-
-.item-preview {
+.signal {
     width: 100%;
     border-radius: 20px;
     margin: 10px 0;

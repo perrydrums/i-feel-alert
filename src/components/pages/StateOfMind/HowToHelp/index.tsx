@@ -1,18 +1,14 @@
 import React from 'react';
 import Subtitle from "../../../atoms/text/Subtitle";
 import './style.css';
-import {Action, Signal} from "../../../../helpers/types";
-import {getActions, getSignals} from "../../../../helpers/get";
+import {Action} from "../../../../helpers/types";
+import {getActions} from "../../../../helpers/get";
 
 export default function HowToHelp({state = 'default'}: {state: string}) {
-  const [signals, setSignals] = React.useState([] as Signal[]);
   const [actions, setActions] = React.useState([] as Action[]);
   const username = 'perry';
 
   React.useEffect(() => {
-    getSignals(username).then((signals) => {
-      setSignals(signals);
-    });
     getActions(username).then((actions) => {
       setActions(actions);
     });

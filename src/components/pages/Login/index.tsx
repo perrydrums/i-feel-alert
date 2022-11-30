@@ -1,12 +1,7 @@
-import React, { useState } from 'react'
-import { supabase } from '../../../helpers/client'
+import React  from 'react'
 
 export default function Login() {
-
   return (
-    <div>
-
-
-    </div>
+    <div></div>
   )
 }

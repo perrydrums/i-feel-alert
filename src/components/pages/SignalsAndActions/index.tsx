@@ -2,20 +2,16 @@ import React  from 'react';
 import './style.css';
 import Button from "../../atoms/Button";
 import NewSignOrActionForm from "../../organisms/forms/NewSignOrActionForm";
-import {getSignals, getActions, getUser} from "../../../helpers/get";
-import {Action, Signal, UserData} from "../../../helpers/types";
+import {getSignals, getActions} from "../../../helpers/get";
+import {Action, Signal} from "../../../helpers/types";
 
 export default function SignalsAndActions() {
   const [showForm, setShowForm] = React.useState(false);
-  const [user, setUser] = React.useState({} as UserData);
   const [signals, setSignals] = React.useState([] as Signal[]);
   const [actions, setActions] = React.useState([] as Action[]);
   const username = 'perry';
 
   React.useEffect(() => {
-    getUser(username).then((user) => {
-      setUser(user);
-    });
     getSignals(username).then((signals) => {
       setSignals(signals);
     });

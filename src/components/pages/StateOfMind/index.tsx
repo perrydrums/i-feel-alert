@@ -7,15 +7,12 @@ import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Button from "../../atoms/Button";
 import {getStateOfUser, getUser} from "../../../helpers/get";
-import Subtitle from "../../atoms/text/Subtitle";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 
 export default function StateOfMind({userType}: { userType: string }) {
   const [stateOfMind, setStateOfMind] = React.useState('loading');
   const [show, setShow] = React.useState('all');
-  const [showHelp, setShowHelp] = React.useState(false);
-  const [showSigns, setShowSigns] = React.useState(false);
   const [user, setUser] = React.useState({name: '', type: ''});
   const username = 'perry';
 

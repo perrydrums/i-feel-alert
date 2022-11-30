@@ -4,4 +4,9 @@
     margin: 10px 0;
     padding: 10px 16px;
     box-sizing: border-box;
+    border: 2px solid transparent;
+}
+
+.action > p {
+    font-size: 22px;
 }

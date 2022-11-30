@@ -28,3 +28,7 @@ h2 {
 .text--green {
     color: var(--color-text--green);
 }
+
+.text--inset {
+    /*padding: 0 16px;*/
+}

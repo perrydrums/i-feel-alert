@@ -1,13 +1,16 @@
 .theme--red {
     color: var(--color-text--red);
+    border-color: var(--color-border--red);
 }
 
 .theme--yellow {
     color: var(--color-text--yellow);
+    border-color: var(--color-border--yellow);
 }
 
 .theme--green {
     color: var(--color-text--green);
+    border-color: var(--color-border--green);
 }
 
 .bg--red {

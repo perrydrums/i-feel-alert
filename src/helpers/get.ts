@@ -31,7 +31,7 @@ export async function getSignals(username: string, filter?: { state?: string, in
     query.eq('state', filter.state)
   }
 
-  if (filter?.internal) {
+  if (filter?.internal !== undefined) {
     query.eq('internal', filter.internal)
   }
 
@@ -49,7 +49,7 @@ export async function getActions(username: string, filter?: { state?: string, in
     query.eq('state', filter.state)
   }
 
-  if (filter?.internal) {
+  if (filter?.internal !== undefined) {
     query.eq('internal', filter.internal)
   }
 

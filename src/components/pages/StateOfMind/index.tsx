@@ -28,6 +28,15 @@ export default function StateOfMind({userType}: { userType: string }) {
       setStateOfMind(state);
     });
 
+    supabase
+      .channel('public:user_state')
+      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
+        if (payload.new.username === username) {
+          setStateOfMind(payload.new.state);
+        }
+      })
+      .subscribe();
+
   }, [])
 
   async function updateStateOfUser(state: string) {

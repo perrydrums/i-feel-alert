@@ -16,9 +16,12 @@ export default function StateOfMind({userType}: { userType: string }) {
   const [user, setUser] = React.useState({name: '', type: ''});
   const username = 'perry';
 
-  const howToHelpRef = useRef(null);
-  // @ts-ignore
-  const scroll = () => howToHelpRef !== null && howToHelpRef.current.scrollIntoView();
+  const howToHelpRef = useRef<null | HTMLDivElement>(null);
+  const scroll = () => {
+    if (howToHelpRef && howToHelpRef.current) {
+      howToHelpRef.current.scrollIntoView()
+    }
+  };
 
   React.useEffect(() => {
     getUser(username).then((user) => {

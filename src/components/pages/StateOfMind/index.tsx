@@ -71,7 +71,7 @@ export default function StateOfMind({userType}: { userType: string }) {
       <>
         {(show === 'all' || show === 'signs') &&
           <Button state={stateOfMind}
-                  text="How can I help?"
+                  text={stateOfMind === 'green' ? 'Keep this up!' : 'How can I help?'}
                   onClick={async () => {
                     await setShow('actions');
                       scroll();

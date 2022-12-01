@@ -10,3 +10,10 @@ body {
     padding: 10px 16px;
     box-sizing: border-box;
 }
+
+.saa-header-with-filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}

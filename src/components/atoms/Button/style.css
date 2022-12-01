@@ -11,6 +11,7 @@
     animation-name: pulse;
     animation-timing-function: ease-out;
     cursor: pointer;
+    color: white;
 }
 
 .button--text {

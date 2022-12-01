@@ -10,3 +10,7 @@
 .action > p {
     font-size: 22px;
 }
+
+.action:last-child {
+    margin-bottom: 24px;
+}

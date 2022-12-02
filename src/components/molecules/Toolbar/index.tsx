@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import './style.css';
-import {LinkCircleButton} from "../../atoms/CircleButton";
 
-export default function Toolbar({name, state = 'default'}: { name: string, state?: string }) {
+export default function Toolbar({title, button = null, state = 'default'}: { title: string, button?: ReactNode, state?: string }) {
   const themeClass = state ? `bg--dark-${state}` : '';
   return (
     <div className={`toolbar ${themeClass}`}>
-      <span className="toolbar--name">Welcome, {name}</span>
+      <span className="toolbar--name">{title}</span>
       <div className="toolbar--button">
-        <LinkCircleButton state={state} to="/me/signs">⚙</LinkCircleButton>
+        {button || ''}
       </div>
     </div>
   );

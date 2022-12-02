@@ -27,3 +27,12 @@ export interface UserState {
   state: string;
   updated_at: string;
 }
+
+export interface User {
+  id: string;
+  email: string;
+  username: string;
+  name: string;
+  description: string;
+  type: string;
+}

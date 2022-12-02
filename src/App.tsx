@@ -7,15 +7,32 @@ import {
   Route, Routes,
 } from 'react-router-dom';
 import SignalsAndActions from "./components/pages/SignalsAndActions";
+import {isLoggedIn} from "./helpers/auth";
+import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 
 function App() {
+  const [loggedIn, setLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    isLoggedIn().then(setLoggedIn);
+  }, []);
+
+  console.log('loggedIn', loggedIn);
+
   return (
     <Router>
-      <Routes>
-        <Route path="/me/signs" element={<SignalsAndActions />}/>
-        <Route path="/me" element={<StateOfMind userType="sharer"/>}/>
-        <Route path="/" element={<StateOfMind userType="listener"/>}/>
-      </Routes>
+        {loggedIn ? (
+          <Routes>
+            <Route path="/me/signs" element={<SignalsAndActions />}/>
+            <Route path="/" element={<StateOfMind />}/>
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<Login />}/>
+            <Route path="/register" element={<Register />}/>
+          </Routes>
+        )}
     </Router>
 
   );

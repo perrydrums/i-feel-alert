@@ -6,17 +6,19 @@ import Text from '../../atoms/text';
 import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Button from "../../atoms/Button";
-import {getStateOfUser, getUser} from "../../../helpers/get";
+import {getStateOfUser} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 import {sendMessage} from "../../../helpers/whatsapp";
 import Toolbar from "../../molecules/Toolbar";
+import {LinkCircleButton} from "../../atoms/CircleButton";
+import {getCurrentUser} from "../../../helpers/auth";
+import {User} from "../../../helpers/types";
 
-export default function StateOfMind({userType}: { userType: string }) {
-  const [stateOfMind, setStateOfMind] = React.useState('loading');
+export default function StateOfMind() {
+  const [stateOfMind, setStateOfMind] = React.useState('unknown');
   const [show, setShow] = React.useState('all');
-  const [user, setUser] = React.useState({name: '', type: ''});
-  const username = 'perry';
+  const [user, setUser] = React.useState<User | null>(null);
 
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
   const scroll = () => {
@@ -26,31 +28,32 @@ export default function StateOfMind({userType}: { userType: string }) {
   };
 
   React.useEffect(() => {
-    getUser(username).then((user) => {
-      setUser(user);
-    });
-    getStateOfUser(username).then((state) => {
-      setStateOfMind(state);
-    });
+    getCurrentUser().then(user => {
+      if (user) {
+        setUser(user);
+        getStateOfUser(user?.username).then((state) => {
+          setStateOfMind(state);
+        });
 
-    supabase
-      .channel('public:user_state')
-      .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
-        if (payload.new.username === username) {
-          setStateOfMind(payload.new.state);
-        }
-      })
-      .subscribe();
-
+        supabase
+          .channel('public:user_state')
+          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
+            if (payload.new.username === user.username) {
+              setStateOfMind(payload.new.state);
+            }
+          })
+          .subscribe();
+      }
+    });
   }, [])
 
   async function updateStateOfUser(state: string) {
     await supabase
       .from('user_state')
       .update({state: state})
-      .eq('username', username)
+      .eq('username', user?.username)
 
-    await sendMessage('31650126861', `${user.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
+    await sendMessage('31650126861', `${user?.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
     setStateOfMind(state);
   }
 
@@ -60,9 +63,9 @@ export default function StateOfMind({userType}: { userType: string }) {
     switch (true) {
       case stateOfMind === 'green':
         return 'Keep this up!';
-      case userType === 'sharer':
+      case user?.type === 'sharer':
         return 'What can I do?';
-      case userType === 'listener':
+      case user?.type === 'listener':
         return 'How can I help?';
       default:
         return 'How can I help?';
@@ -71,19 +74,22 @@ export default function StateOfMind({userType}: { userType: string }) {
 
   return (
     <>
-      <Toolbar name={user.name} state={stateOfMind}/>
+      <Toolbar title={`Welcome, ${user?.name}`}
+               state={stateOfMind}
+               button={<LinkCircleButton state={stateOfMind} to="/me/signs">⚙</LinkCircleButton>}
+      />
       <div className={'page ' + themeClass}>
         <div className="som-title-container">
-          {userType === 'sharer'
+          {user?.type === 'sharer'
             ? <Title theme={stateOfMind}>I'm feeling</Title>
             : <>
-              <Text theme={stateOfMind}>{user.name || '&nbsp;'}</Text>
+              <Text theme={stateOfMind}>{user?.name || '&nbsp;'}</Text>
               <Title theme={stateOfMind}>currently feels</Title>
             </>
           }
         </div>
         <StateIndicator state={stateOfMind}
-                        update={userType === 'sharer' ? updateStateOfUser : null}
+                        update={user?.type === 'sharer' ? updateStateOfUser : null}
         />
         {(show === 'all' || show === 'signs') &&
           <Button state={stateOfMind}
@@ -105,12 +111,12 @@ export default function StateOfMind({userType}: { userType: string }) {
         }
         {show === 'actions' &&
           <div ref={howToHelpRef}>
-            <HowToHelp state={stateOfMind} userType={userType} />
+            <HowToHelp state={stateOfMind} userType={user?.type || ''} />
           </div>
         }
         {show === 'signs' &&
           <div ref={howToHelpRef}>
-            <WhatAreTheSigns state={stateOfMind} userType={userType} />
+            <WhatAreTheSigns state={stateOfMind} userType={user?.type || ''} />
           </div>
         }
       </div>

@@ -76,7 +76,7 @@ export default function StateOfMind() {
     <>
       <Toolbar title={`Welcome, ${user?.name}`}
                state={stateOfMind}
-               button={<LinkCircleButton state={stateOfMind} to="/me/signs">⚙</LinkCircleButton>}
+               button={<LinkCircleButton state={stateOfMind} to="/me">⚙</LinkCircleButton>}
       />
       <div className={'page ' + themeClass}>
         <div className="som-title-container">

@@ -65,5 +65,6 @@ export async function login(email: string, password: string) {
 }
 
 export async function logout() {
-  return await supabase.auth.signOut();
+  await supabase.auth.signOut();
+  window.location.assign('/');
 }

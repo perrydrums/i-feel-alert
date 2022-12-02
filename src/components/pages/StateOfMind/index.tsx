@@ -10,6 +10,7 @@ import {getStateOfUser, getUser} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 import {sendMessage} from "../../../helpers/whatsapp";
+import Toolbar from "../../molecules/Toolbar";
 
 export default function StateOfMind({userType}: { userType: string }) {
   const [stateOfMind, setStateOfMind] = React.useState('loading');
@@ -68,47 +69,51 @@ export default function StateOfMind({userType}: { userType: string }) {
     }
   };
 
-  return <div className={'page ' + themeClass}>
-    <div className="som-title-container">
-      {userType === 'sharer'
-        ? <Title theme={stateOfMind}>I'm feeling</Title>
-        : <>
-          <Text theme={stateOfMind}>{user.name || '&nbsp;'}</Text>
-          <Title theme={stateOfMind}>currently feels</Title>
-        </>
-      }
-
-    </div>
-    <StateIndicator state={stateOfMind}
-                    update={userType === 'sharer' ? updateStateOfUser : null}
-    />
-    {(show === 'all' || show === 'signs') &&
-      <Button state={stateOfMind}
-              text={actionButtonText()}
-              onClick={async () => {
-                await setShow('actions');
-                  scroll();
-              }}
-      />
-    }
-    {(show === 'all' || show === 'actions') &&
-      <Button state={stateOfMind}
-              text="What are the signs?"
-              onClick={async () => {
-                await setShow('signs');
-                  scroll();
-              }}
-      />
-    }
-    {show === 'actions' &&
-      <div ref={howToHelpRef}>
-        <HowToHelp state={stateOfMind} userType={userType} />
+  return (
+    <>
+      <Toolbar name={user.name} state={stateOfMind}/>
+      <div className={'page ' + themeClass}>
+        <div className="som-title-container">
+          {userType === 'sharer'
+            ? <Title theme={stateOfMind}>I'm feeling</Title>
+            : <>
+              <Text theme={stateOfMind}>{user.name || '&nbsp;'}</Text>
+              <Title theme={stateOfMind}>currently feels</Title>
+            </>
+          }
+        </div>
+        <StateIndicator state={stateOfMind}
+                        update={userType === 'sharer' ? updateStateOfUser : null}
+        />
+        {(show === 'all' || show === 'signs') &&
+          <Button state={stateOfMind}
+                  text={actionButtonText()}
+                  onClick={async () => {
+                    await setShow('actions');
+                    scroll();
+                  }}
+          />
+        }
+        {(show === 'all' || show === 'actions') &&
+          <Button state={stateOfMind}
+                  text="What are the signs?"
+                  onClick={async () => {
+                    await setShow('signs');
+                    scroll();
+                  }}
+          />
+        }
+        {show === 'actions' &&
+          <div ref={howToHelpRef}>
+            <HowToHelp state={stateOfMind} userType={userType} />
+          </div>
+        }
+        {show === 'signs' &&
+          <div ref={howToHelpRef}>
+            <WhatAreTheSigns state={stateOfMind} userType={userType} />
+          </div>
+        }
       </div>
-    }
-    {show === 'signs' &&
-      <div ref={howToHelpRef}>
-        <WhatAreTheSigns state={stateOfMind} userType={userType} />
-      </div>
-    }
-  </div>;
+    </>
+  );
 }

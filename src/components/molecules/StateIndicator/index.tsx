@@ -1,6 +1,6 @@
 import React from 'react';
 import StateIndicatorCircles from "../../atoms/StateIndicatorCircles";
-import ArrowButton from "../../atoms/ArrowButton";
+import {ArrowButton} from "../../atoms/CircleButton";
 
 export default function StateIndicator({state, update = null}: {state: string, update?: ((state: string) => void) | null}) {
   const states = ['red', 'yellow', 'green'];

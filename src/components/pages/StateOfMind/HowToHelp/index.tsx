@@ -5,15 +5,15 @@ import {Action} from "../../../../helpers/types";
 import {getActions} from "../../../../helpers/get";
 import ActionElement from "../../../molecules/Action";
 
-export default function HowToHelp({state = 'default'}: {state: string}) {
+export default function HowToHelp({state = 'default', userType}: {state: string, userType: string}) {
   const [actions, setActions] = React.useState([] as Action[]);
   const username = 'perry';
 
   React.useEffect(() => {
-    getActions(username, {state, internal: false}).then((actions) => {
+    getActions(username, {state, internal: userType === 'sharer'}).then((actions) => {
       setActions(actions);
     });
-  }, [state]);
+  }, [state, userType]);
 
   const actionsHtml = actions.map((action) => <ActionElement action={action} key={`action-${action.id}`}/>);
 

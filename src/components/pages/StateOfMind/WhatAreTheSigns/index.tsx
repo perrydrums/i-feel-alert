@@ -5,15 +5,15 @@ import {getSignals} from "../../../../helpers/get";
 import './style.css';
 import SignalElement from "../../../molecules/Signal";
 
-export default function WhatAreTheSigns({state = 'default'}: {state: string}) {
+export default function WhatAreTheSigns({state = 'default', userType}: {state: string, userType: string}) {
   const [signals, setSignals] = React.useState([] as Signal[]);
   const username = 'perry';
 
   React.useEffect(() => {
-    getSignals(username, {state, internal: false}).then((signals) => {
+    getSignals(username, {state, internal: userType === 'sharer'}).then((signals) => {
       setSignals(signals);
     });
-  }, [state]);
+  }, [state, userType]);
 
   const signalsHtml = signals.map((signal) => <SignalElement signal={signal} key={`signal-${signal.id}`}/>);
 

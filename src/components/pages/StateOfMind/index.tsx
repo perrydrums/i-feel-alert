@@ -55,6 +55,19 @@ export default function StateOfMind({userType}: { userType: string }) {
 
   const themeClass = stateOfMind === 'unknown' ? '' : `bg--${stateOfMind}`;
 
+  const actionButtonText = () => {
+    switch (true) {
+      case stateOfMind === 'green':
+        return 'Keep this up!';
+      case userType === 'sharer':
+        return 'What can I do?';
+      case userType === 'listener':
+        return 'How can I help?';
+      default:
+        return 'How can I help?';
+    }
+  };
+
   return <div className={'page ' + themeClass}>
     <div className="som-title-container">
       {userType === 'sharer'
@@ -69,36 +82,32 @@ export default function StateOfMind({userType}: { userType: string }) {
     <StateIndicator state={stateOfMind}
                     update={userType === 'sharer' ? updateStateOfUser : null}
     />
-    {userType === 'listener' &&
-      <>
-        {(show === 'all' || show === 'signs') &&
-          <Button state={stateOfMind}
-                  text={stateOfMind === 'green' ? 'Keep this up!' : 'How can I help?'}
-                  onClick={async () => {
-                    await setShow('actions');
-                      scroll();
-                  }}
-          />
-        }
-        {(show === 'all' || show === 'actions') &&
-          <Button state={stateOfMind}
-                  text="What are the signs?"
-                  onClick={async () => {
-                    await setShow('signs');
-                      scroll();
-                  }}
-          />
-        }
-      </>
+    {(show === 'all' || show === 'signs') &&
+      <Button state={stateOfMind}
+              text={actionButtonText()}
+              onClick={async () => {
+                await setShow('actions');
+                  scroll();
+              }}
+      />
+    }
+    {(show === 'all' || show === 'actions') &&
+      <Button state={stateOfMind}
+              text="What are the signs?"
+              onClick={async () => {
+                await setShow('signs');
+                  scroll();
+              }}
+      />
     }
     {show === 'actions' &&
       <div ref={howToHelpRef}>
-        <HowToHelp state={stateOfMind} />
+        <HowToHelp state={stateOfMind} userType={userType} />
       </div>
     }
     {show === 'signs' &&
       <div ref={howToHelpRef}>
-        <WhatAreTheSigns state={stateOfMind} />
+        <WhatAreTheSigns state={stateOfMind} userType={userType} />
       </div>
     }
   </div>;

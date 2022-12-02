@@ -21,3 +21,9 @@
 .hide {
     visibility: hidden;
 }
+
+.state-indicator-title {
+    font-size: 80px;
+    text-transform: uppercase;
+    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+}

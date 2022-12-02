@@ -7,10 +7,6 @@
     border: 2px solid transparent;
 }
 
-.signal > p {
-    font-size: 22px;
-}
-
 .signal:last-child {
     margin-bottom: 24px;
 }

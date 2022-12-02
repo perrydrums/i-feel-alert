@@ -5,7 +5,7 @@ export default function Toolbar({title, button = null, state = 'default'}: { tit
   const themeClass = state ? `bg--dark-${state}` : '';
   return (
     <div className={`toolbar ${themeClass}`}>
-      <span className="toolbar--name">{title}</span>
+      <p className="toolbar--name">{title}</p>
       <div className="toolbar--button">
         {button || ''}
       </div>

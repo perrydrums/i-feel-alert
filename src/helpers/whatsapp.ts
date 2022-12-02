@@ -1,4 +1,7 @@
 export function sendMessage(recipient: string, text: string) {
+  if (process.env.REACT_APP_WHATSAPP_ENABLED === '0') {
+    return null;
+  }
   const body = JSON.stringify({
     "messaging_product": "whatsapp",
     "preview_url": false,

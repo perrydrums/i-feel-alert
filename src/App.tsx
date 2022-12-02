@@ -10,6 +10,7 @@ import SignalsAndActions from "./components/pages/SignalsAndActions";
 import {isLoggedIn} from "./helpers/auth";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
+import Profile from "./components/pages/Profile";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -25,6 +26,7 @@ function App() {
         {loggedIn ? (
           <Routes>
             <Route path="/me/signs" element={<SignalsAndActions />}/>
+            <Route path="/me" element={<Profile />}/>
             <Route path="/" element={<StateOfMind />}/>
           </Routes>
         ) : (

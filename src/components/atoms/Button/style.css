@@ -12,6 +12,7 @@
     animation-timing-function: ease-out;
     cursor: pointer;
     color: white;
+    text-align: center;
 }
 
 .button--text {

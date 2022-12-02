@@ -9,6 +9,7 @@ import Button from "../../atoms/Button";
 import {getStateOfUser, getUser} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
+import {sendMessage} from "../../../helpers/whatsapp";
 
 export default function StateOfMind({userType}: { userType: string }) {
   const [stateOfMind, setStateOfMind] = React.useState('loading');
@@ -48,6 +49,7 @@ export default function StateOfMind({userType}: { userType: string }) {
       .update({state: state})
       .eq('username', username)
 
+    await sendMessage('31650126861', `${user.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
     setStateOfMind(state);
   }
 

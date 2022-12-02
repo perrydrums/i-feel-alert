@@ -2,12 +2,27 @@ import React from 'react';
 import './style.css';
 
 export default function StateFilter({onClick}: {onClick: (state: string) => any}) {
+  const [selected, setSelected] = React.useState('all');
+
+  const buttons = ['all', 'red', 'yellow', 'green'].map((state) => {
+    const className = `state-filter-button ${state === 'all' 
+      ? 'state-filter-button--all' 
+      : `bg--${state}`}
+    `;
+
+    return (
+      <button key={state}
+              className={`${className} ${selected === state ? 'state-filter--selected' : ''}`}
+              onClick={() => {
+                setSelected(state);
+                onClick(state);
+              }}
+      />
+    )
+  });
   return (
     <div className="state-filter">
-      <button className="state-filter-button state-filter-button--rainbow" onClick={() => onClick('all')} />
-      <button className="state-filter-button bg--red" onClick={() => onClick('red')} />
-      <button className="state-filter-button bg--yellow" onClick={() => onClick('yellow')} />
-      <button className="state-filter-button bg--green" onClick={() => onClick('green')} />
+      {buttons}
     </div>
   );
 }

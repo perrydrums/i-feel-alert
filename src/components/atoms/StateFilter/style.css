@@ -12,7 +12,7 @@
     margin: 0 4px;
 }
 
-.state-filter-button--rainbow {
+.state-filter-button--all {
     background: conic-gradient(
             from 0deg at 50% 50%,
             var(--color-bg-green) 0%,
@@ -27,4 +27,8 @@
 
 .state-filter-button:last-child {
     margin-right: 0;
+}
+
+.state-filter--selected {
+    border: 2px solid white;
 }

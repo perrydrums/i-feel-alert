@@ -10,15 +10,17 @@ export default function StateIndicator({state, update = null}: {state: string, u
     ? <StateIndicatorCircles state={state}/>
     : (
         <div className="state-indicator">
-          {state !== 'green' && <ArrowButton direction="up"
-                                             state={state}
-                                             onClick={() => update(states[current + 1] || '')}
-          /> }
+          <ArrowButton direction="up"
+                       state={state}
+                       hide={state === 'green'}
+                       onClick={() => update(states[current + 1] || '')}
+          />
           <StateIndicatorCircles state={state}/>
-          {state !== 'red' && <ArrowButton direction="down"
-                                           state={state}
-                                           onClick={() => update(states[current - 1] || '')}
-          /> }
+          <ArrowButton direction="down"
+                       state={state}
+                       hide={state === 'red'}
+                       onClick={() => update(states[current - 1] || '')}
+          />
         </div>
     );
 }

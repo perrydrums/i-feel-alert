@@ -17,7 +17,7 @@ export function ArrowButton({state, direction, hide, onClick}: {state?: string, 
   );
 }
 
-export function LinkCircleButton({state, to, children}: {state?: string, to: string, children: ReactNode}) {
+export function LinkCircleButton({state = 'default', to, children}: {state?: string, to: string, children: ReactNode}) {
   const themeClass = state ? `theme--dark-${state}` : '';
 
   return (

@@ -28,6 +28,10 @@
     border-color: var(--color-text--green);
 }
 
+.theme--dark-default {
+    color: white;
+}
+
 .bg--red {
     background-color: var(--color-bg-red);
 }

@@ -14,6 +14,7 @@ export default function Profile() {
       />
       <div className="page">
         <ButtonLink text="Signals and Actions" to="/me/signs" />
+        <ButtonLink text="Supporters" to="/me/supporters" />
         <Button text="Log out" onClick={() => logout()} />
       </div>
     </>

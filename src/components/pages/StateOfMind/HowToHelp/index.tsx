@@ -4,15 +4,20 @@ import './style.css';
 import {Action} from "../../../../helpers/types";
 import {getActions} from "../../../../helpers/get";
 import ActionElement from "../../../molecules/Action";
+import {getCurrentUser} from "../../../../helpers/auth";
 
 export default function HowToHelp({state = 'default', userType}: {state: string, userType: string}) {
   const [actions, setActions] = React.useState([] as Action[]);
-  const username = 'perry';
 
   React.useEffect(() => {
-    getActions(username, {state, internal: userType === 'sharer'}).then((actions) => {
-      setActions(actions);
+    getCurrentUser().then(user => {
+      if (user) {
+        getActions(user.id, {state, internal: user.type === 'sharer'}).then((actions) => {
+          setActions(actions);
+        });
+      }
     });
+
   }, [state, userType]);
 
   const actionsHtml = actions.map((action) => <ActionElement action={action} key={`action-${action.id}`}/>);

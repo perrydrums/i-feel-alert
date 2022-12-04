@@ -11,6 +11,7 @@ import {isLoggedIn} from "./helpers/auth";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
+import Supporters from "./components/pages/Supporters";
 
 function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -19,13 +20,12 @@ function App() {
     isLoggedIn().then(setLoggedIn);
   }, []);
 
-  console.log('loggedIn', loggedIn);
-
   return (
     <Router>
         {loggedIn ? (
           <Routes>
             <Route path="/me/signs" element={<SignalsAndActions />}/>
+            <Route path="/me/supporters" element={<Supporters />}/>
             <Route path="/me" element={<Profile />}/>
             <Route path="/" element={<StateOfMind />}/>
           </Routes>

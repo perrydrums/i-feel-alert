@@ -8,46 +8,43 @@ export async function isLoggedIn() {
 }
 
 export async function getCurrentUser(): Promise<User | null> {
-  const { data: { user }, error } =  await supabase.auth.getUser();
-  if (!error && user) {
-    return {
-      id: user.id,
-      email: user.email || '',
-      username: user.user_metadata.username,
-      name: user.user_metadata.name,
-      description: user.user_metadata.description,
-      type: user.user_metadata.type,
+  const { data: { user } } =  await supabase.auth.getUser();
+  if (user?.id) {
+    const { data } = await supabase
+      .from('users')
+      .select()
+      .limit(1)
+      .eq('id', user.id);
+
+    if (data) {
+      return data[0];
     }
   }
 
   return null;
 }
 
-export async function register({email, password, type, username, name, description}: {
+export async function register({email, password, type, name}: {
   email: string,
   password: string,
   type: string,
-  username: string,
   name: string,
-  description: string,
 }) {
-  const response = await supabase.auth.signUp({
+  const { data: { user } } = await supabase.auth.signUp({
     email,
     password: sha256(password).toString(),
-    options: {
-      data: {
-        type,
-        username,
-        name,
-        description,
-      }
-    }
   })
 
-  if (!response.error) {
+  if (user) {
     const { error } = await supabase
-      .from('user_state')
-      .insert({ username: username, state: 'green' });
+      .from('users')
+      .insert({id: user.id, email, name, type});
+
+    if (type === 'sharer') {
+      await supabase
+        .from('user_state')
+        .insert({ user_id: user.id, state: 'green' });
+    }
 
     if (!error) {
       return true;

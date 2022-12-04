@@ -31,14 +31,14 @@ export default function StateOfMind() {
     getCurrentUser().then(user => {
       if (user) {
         setUser(user);
-        getStateOfUser(user?.username).then((state) => {
+        getStateOfUser(user.id).then((state) => {
           setStateOfMind(state);
         });
 
         supabase
           .channel('public:user_state')
           .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
-            if (payload.new.username === user.username) {
+            if (payload.new.user_id === user.id) {
               setStateOfMind(payload.new.state);
             }
           })
@@ -48,13 +48,15 @@ export default function StateOfMind() {
   }, [])
 
   async function updateStateOfUser(state: string) {
-    await supabase
-      .from('user_state')
-      .update({state: state})
-      .eq('username', user?.username)
+    if (user) {
+      await supabase
+        .from('user_state')
+        .update({state: state})
+        .eq('user_id', user.id);
 
-    await sendMessage('31650126861', `${user?.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
-    setStateOfMind(state);
+      await sendMessage('31650126861', `${user.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
+      setStateOfMind(state);
+    }
   }
 
   const themeClass = stateOfMind === 'unknown' ? '' : `bg--${stateOfMind}`;

@@ -4,6 +4,7 @@ import TextArea from "../../../atoms/inputs/TextArea";
 import Submit from "../../../atoms/inputs/Submit";
 import {supabase} from "../../../../helpers/client";
 import './style.css';
+import {getCurrentUser} from "../../../../helpers/auth";
 
 export default function NewSignOrActionForm() {
   const [type, setType] = React.useState('');
@@ -13,16 +14,19 @@ export default function NewSignOrActionForm() {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log('submitting', { type, state, internal, description });
-
     const table = type === 'signal' ? 'signals' : 'actions';
+    const user = await getCurrentUser();
 
-    const { error } = await supabase
-      .from(table)
-      .insert({ username: 'perry', state, internal, description })
-
-    console.log('error', error);
+    if (user) {
+      await supabase
+        .from(table)
+        .insert({
+          user_id: user.id,
+          state,
+          internal,
+          description
+        });
+    }
   };
 
   return (

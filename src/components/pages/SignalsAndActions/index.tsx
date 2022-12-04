@@ -22,10 +22,10 @@ export default function SignalsAndActions() {
   React.useEffect(() => {
     getCurrentUser().then(user => {
       if (user) {
-        getSignals(user?.username).then((signals) => {
+        getSignals(user.id).then((signals) => {
           setSignals(signals);
         });
-        getActions(user?.username).then((actions) => {
+        getActions(user.id).then((actions) => {
           setActions(actions);
         });
       }

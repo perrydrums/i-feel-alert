@@ -55,3 +55,17 @@ export async function getSupporters(userId: string) {
 
   return data || [];
 }
+
+export async function getUserById(userId: string): Promise<User> {
+  const {data} = await supabase
+    .from('users')
+    .select()
+    .limit(1)
+    .eq('id', userId);
+
+  if (data) {
+    return data[0];
+  }
+
+  throw new Error('User not found');
+}

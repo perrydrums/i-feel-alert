@@ -6,7 +6,6 @@ import {LinkCircleButton} from "../../atoms/CircleButton";
 import {getStateOfUser, getSupporters} from "../../../helpers/get";
 import {User} from "../../../helpers/types";
 import {getCurrentUser} from "../../../helpers/auth";
-import {supabase} from "../../../helpers/client";
 
 export default function Supporters() {
   const [user, setUser] = React.useState<User | null>(null);
@@ -27,6 +26,7 @@ export default function Supporters() {
       <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>}/>
       <div className="page">
         <Title theme="default">Supporters</Title>
+        Ask for support link: /support/{user?.id}
       </div>
     </>
   );

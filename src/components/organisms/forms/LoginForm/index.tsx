@@ -3,6 +3,7 @@ import TextField from "../../../atoms/inputs/TextField";
 import Submit from "../../../atoms/inputs/Submit";
 import './style.css';
 import {login} from "../../../../helpers/auth";
+import Password from "../../../atoms/inputs/Password";
 
 export default function LoginForm() {
   const [email, setEmail] = React.useState('');
@@ -25,7 +26,7 @@ export default function LoginForm() {
       <TextField name="email"
                  onChange={(value) => { setEmail(value) }}
       />
-      <TextField name="password"
+      <Password name="password"
                  onChange={(value) => { setPassword(value) }}
       />
       <Submit name="Log in" />

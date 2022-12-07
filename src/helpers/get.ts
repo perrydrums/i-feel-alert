@@ -63,8 +63,6 @@ export async function getSupporting(userId: string): Promise<User | null> {
     .eq('supporter_id', userId)
     .limit(1);
 
-  console.log(data);
-
   return data ? data[0]?.users as User : null;
 }
 

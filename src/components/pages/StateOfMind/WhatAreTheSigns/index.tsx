@@ -17,7 +17,6 @@ export default function WhatAreTheSigns({state = 'default', userType}: {state: s
         });
       }
     });
-
   }, [state, userType]);
 
   const signalsHtml = signals.map((signal) => <SignalElement signal={signal} key={`signal-${signal.id}`}/>);

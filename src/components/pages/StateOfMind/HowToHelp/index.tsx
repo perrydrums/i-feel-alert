@@ -17,7 +17,6 @@ export default function HowToHelp({state = 'default', userType}: {state: string,
         });
       }
     });
-
   }, [state, userType]);
 
   const actionsHtml = actions.map((action) => <ActionElement action={action} key={`action-${action.id}`}/>);

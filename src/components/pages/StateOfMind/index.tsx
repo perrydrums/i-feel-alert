@@ -6,7 +6,7 @@ import Text from '../../atoms/text';
 import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Button from "../../atoms/Button";
-import {getStateOfUser} from "../../../helpers/get";
+import {getStateOfUser, getSupporting} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 import {sendMessage} from "../../../helpers/whatsapp";
@@ -18,7 +18,8 @@ import {User} from "../../../helpers/types";
 export default function StateOfMind() {
   const [stateOfMind, setStateOfMind] = React.useState('unknown');
   const [show, setShow] = React.useState('all');
-  const [user, setUser] = React.useState<User | null>(null);
+  const [user, setUser] = React.useState<User>();
+  const [sharer, setSharer] = React.useState<User>();
 
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
   const scroll = () => {
@@ -31,14 +32,26 @@ export default function StateOfMind() {
     getCurrentUser().then(user => {
       if (user) {
         setUser(user);
-        getStateOfUser(user.id).then((state) => {
-          setStateOfMind(state);
-        });
-
+        const tempSharer = user;
+        if (user.type === 'sharer') {
+          getStateOfUser(user.id).then((state) => {
+            setStateOfMind(state);
+          });
+        }
+        else {
+          getSupporting(user.id).then((sharer) => {
+            if (sharer) {
+              setSharer(sharer);
+              getStateOfUser(sharer.id).then((state) => {
+                setStateOfMind(state);
+              });
+            }
+          });
+        }
         supabase
           .channel('public:user_state')
           .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
-            if (payload.new.user_id === user.id) {
+            if (payload.new.user_id === tempSharer.id) {
               setStateOfMind(payload.new.state);
             }
           })
@@ -85,7 +98,7 @@ export default function StateOfMind() {
           {user?.type === 'sharer'
             ? <Title theme={stateOfMind}>I'm feeling</Title>
             : <>
-              <Text theme={stateOfMind}>{user?.name || '&nbsp;'}</Text>
+              <Text theme={stateOfMind}>{sharer?.name || '&nbsp;'}</Text>
               <Title theme={stateOfMind}>currently feels</Title>
             </>
           }

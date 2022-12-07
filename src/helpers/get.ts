@@ -56,6 +56,18 @@ export async function getSupporters(userId: string) {
   return data || [];
 }
 
+export async function getSupporting(userId: string): Promise<User | null> {
+  const {data} = await supabase
+    .from('sharer_supporter')
+    .select('users!sharer_supporter_sharer_id_fkey(*)')
+    .eq('supporter_id', userId)
+    .limit(1);
+
+  console.log(data);
+
+  return data ? data[0]?.users as User : null;
+}
+
 export async function getUserById(userId: string): Promise<User> {
   const {data} = await supabase
     .from('users')

@@ -3,8 +3,11 @@ import sha256 from 'crypto-js/sha256';
 import {User} from "./types";
 
 export async function isLoggedIn() {
-  const { data: { user } } = await supabase.auth.getUser();
-  return user !== null;
+  const {
+    data: { session },
+  } = await supabase.auth.getSession()
+
+  return !!session;
 }
 
 export async function getCurrentUser(): Promise<User | null> {

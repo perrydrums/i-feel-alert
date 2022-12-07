@@ -47,13 +47,13 @@ export async function getActions(userId: string, filter?: { state?: string, inte
   return data ? data : [];
 }
 
-export async function getSupporters(userId: string) {
+export async function getSupporters(userId: string): Promise<User[]> {
   const {data} = await supabase
     .from('sharer_supporter')
     .select('users!sharer_supporter_supporter_id_fkey(*)')
     .eq('sharer_id', userId);
 
-  return data || [];
+  return data ? data.map((d) => d.users as User) : [];
 }
 
 export async function getSupporting(userId: string): Promise<User | null> {

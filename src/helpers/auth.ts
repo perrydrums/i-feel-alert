@@ -1,6 +1,7 @@
 import {supabase} from "./client";
 import sha256 from 'crypto-js/sha256';
 import {User} from "./types";
+import {User as SupabaseUser} from "@supabase/supabase-js";
 
 export async function isLoggedIn() {
   const {
@@ -10,8 +11,15 @@ export async function isLoggedIn() {
   return !!session;
 }
 
-export async function getCurrentUser(): Promise<User | null> {
+export async function fetchCurrentUser(): Promise<SupabaseUser | null> {
   const { data: { user } } =  await supabase.auth.getUser();
+  return user;
+}
+
+export async function getCurrentUser(): Promise<User | null> {
+  const { data: { session }} = await supabase.auth.getSession();
+  const user = session?.user || await fetchCurrentUser();
+
   if (user?.id) {
     const { data } = await supabase
       .from('users')

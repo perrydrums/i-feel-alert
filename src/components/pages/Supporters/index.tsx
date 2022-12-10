@@ -51,7 +51,7 @@ export default function Supporters() {
         <b>{supporter.name}</b> <br/>
         <small>{supporter.email}</small>
       </div>
-      <CircleButton onClick={() => disconnectSupporter(supporter.id)}>🗑</CircleButton>
+      <CircleButton size="24px" onClick={() => disconnectSupporter(supporter.id)}>🗑</CircleButton>
     </div>
   );
 

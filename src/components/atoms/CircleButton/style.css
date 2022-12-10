@@ -12,6 +12,8 @@
 
 .circle-button--icon {
     font-size: 36px;
+    width: 42px;
+    height: 42px;
     border: none;
     background: none;
     text-align: right;

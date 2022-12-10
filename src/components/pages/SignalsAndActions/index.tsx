@@ -37,13 +37,14 @@ export default function SignalsAndActions() {
       return <SignalElement signal={signal} key={`signal-${signal.id}`}/>
     }
     return null;
-  });
+  }).filter(a => a);
+
   const signalsHtmlExternal = signals.map((signal) => {
     if (!signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
       return <SignalElement signal={signal} key={`signal-${signal.id}`}/>
     }
     return null;
-  });
+  }).filter(a => a);
 
   const actionsHtmlInternal = actions.map((action) => {
     if (action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
@@ -51,7 +52,7 @@ export default function SignalsAndActions() {
     }
 
     return null;
-  });
+  }).filter(a => a);
 
   const actionsHtmlExternal = actions.map((action) => {
     if (!action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
@@ -59,7 +60,7 @@ export default function SignalsAndActions() {
     }
 
     return null;
-  });
+  }).filter(a => a);
 
   return (
     <>
@@ -77,17 +78,33 @@ export default function SignalsAndActions() {
             <Subtitle theme="default">Signals</Subtitle>
             <StateFilter onClick={(state) => setStateFilter(state)} />
           </div>
-          <MiniSubtitle theme="default">Internal</MiniSubtitle>
-          <div>{signalsHtmlInternal}</div>
-          <MiniSubtitle theme="default">External</MiniSubtitle>
-          <div>{signalsHtmlExternal}</div>
+          {signalsHtmlInternal.length > 0 &&
+            <>
+              <MiniSubtitle theme="default">Internal</MiniSubtitle>
+              <div>{signalsHtmlInternal}</div>
+            </>
+          }
+          {signalsHtmlExternal.length > 0 &&
+            <>
+              <MiniSubtitle theme="default">External</MiniSubtitle>
+              <div>{signalsHtmlExternal}</div>
+            </>
+          }
         </div>
         <div>
           <Subtitle theme="default">Actions</Subtitle>
-          <MiniSubtitle theme="default">Internal</MiniSubtitle>
-          <div>{actionsHtmlInternal}</div>
-          <MiniSubtitle theme="default">External</MiniSubtitle>
-          <div>{actionsHtmlExternal}</div>
+          {actionsHtmlInternal.length > 0 &&
+            <>
+              <MiniSubtitle theme="default">Internal</MiniSubtitle>
+              <div>{actionsHtmlInternal}</div>
+            </>
+          }
+          {actionsHtmlExternal.length > 0 &&
+            <>
+              <MiniSubtitle theme="default">External</MiniSubtitle>
+              <div>{actionsHtmlExternal}</div>
+            </>
+          }
         </div>
       </div>
     </>

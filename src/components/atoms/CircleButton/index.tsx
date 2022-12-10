@@ -2,13 +2,14 @@ import React, {ReactNode} from 'react';
 import './style.css';
 import {Link} from "react-router-dom";
 
-export function CircleButton({state = 'default', onClick, children}: {state?: string, onClick?: () => any, children: ReactNode}) {
+export function CircleButton({state = 'default', onClick, size = '36px', children}: {state?: string, size?: string, onClick?: () => any, children: ReactNode}) {
   const themeClass = state ? `theme--dark-${state}` : '';
 
   return (
     <button
       className={`circle-button circle-button--icon ${themeClass}`}
       onClick={onClick}
+      style={{fontSize: size}}
     >
       {children}
     </button>

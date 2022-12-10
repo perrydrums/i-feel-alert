@@ -1,12 +1,27 @@
 .signal {
-    width: 100%;
-    border-radius: var(--border-radius);
-    margin: 10px 0;
-    padding: 10px 16px;
-    box-sizing: border-box;
-    border: 2px solid transparent;
+    padding: 10px 13px;
+    margin: 8px 0 16px 0;
+    font-size: 18px;
+    background-color: var(--color-text--light-gray);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .signal:last-child {
     margin-bottom: 24px;
+}
+
+.signal--red {
+    border-left: 6px solid var(--color-bg-red);
+}
+
+.signal--yellow {
+    border-left: 6px solid var(--color-bg-yellow);
+}
+
+.signal--green {
+    border-left: 6px solid var(--color-bg-green);
 }

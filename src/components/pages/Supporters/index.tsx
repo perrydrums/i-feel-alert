@@ -6,6 +6,7 @@ import {LinkCircleButton} from "../../atoms/CircleButton";
 import {getSupporters} from "../../../helpers/get";
 import {User} from "../../../helpers/types";
 import {getCurrentUser} from "../../../helpers/auth";
+import Button from "../../atoms/Button";
 
 export default function Supporters() {
   const [user, setUser] = React.useState<User | null>(null);
@@ -29,12 +30,26 @@ export default function Supporters() {
     </li>
   );
 
+  function shareSupportLink() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'WebShare API Demo',
+        url: `/support/${user?.id}`
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      })
+        .catch(console.error);
+    } else {
+      // fallback
+    }
+  }
+
   return (
     <>
       <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>}/>
       <div className="page">
         <Title theme="default">Supporters</Title>
-        Ask for support link: /support/{user?.id}
+        <Button text="Ask for support" onClick={shareSupportLink} />
         <ul>
           {supportersList}
         </ul>

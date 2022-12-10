@@ -28,7 +28,7 @@ export default function Profile() {
           ? <>
               <ButtonLink text="Signals and Actions" to="/me/signs" />
               <ButtonLink text="Supporters" to="/me/supporters" />
-            </>
+          </>
           : <>
 
             </>

@@ -12,14 +12,13 @@ import WhatAreTheSigns from "./WhatAreTheSigns";
 import {sendMessage} from "../../../helpers/whatsapp";
 import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
-import {getCurrentUser} from "../../../helpers/auth";
 import {User} from "../../../helpers/types";
 import {useUserContext} from "../../../context/User";
 
 export default function StateOfMind() {
-  const [stateOfMind, setStateOfMind] = React.useState('unknown');
-  const [show, setShow] = React.useState('all');
   const user = useUserContext();
+  const [stateOfMind, _setStateOfMind] = React.useState(localStorage.getItem('lastStateOfMind') || 'unknown');
+  const [show, setShow] = React.useState('all');
   const [sharer, setSharer] = React.useState<User>();
 
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
@@ -29,36 +28,43 @@ export default function StateOfMind() {
     }
   };
 
+  const setStateOfMind = (state: string) => {
+    _setStateOfMind(state);
+    localStorage.setItem('lastStateOfMind', state);
+  }
+
   React.useEffect(() => {
-    getCurrentUser().then(user => {
-      if (user) {
-        const tempSharer = user;
-        if (user.type === 'sharer') {
-          getStateOfUser(user.id).then((state) => {
-            setStateOfMind(state);
-          });
-        }
-        else {
-          getSupporting(user.id).then((sharer) => {
-            if (sharer) {
-              setSharer(sharer);
-              getStateOfUser(sharer.id).then((state) => {
-                setStateOfMind(state);
-              });
-            }
-          });
-        }
-        supabase
-          .channel('public:user_state')
-          .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
-            if (payload.new.user_id === tempSharer.id) {
-              setStateOfMind(payload.new.state);
-            }
-          })
-          .subscribe();
+    const addListener = (sharer: User) => {
+      supabase
+        .channel('public:user_state')
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
+          if (payload.new.user_id === sharer.id) {
+            setStateOfMind(payload.new.state);
+          }
+        })
+        .subscribe();
+    }
+
+    const getStateOfMind = async (user: User) => {
+      if (user.type === 'sharer') {
+        setStateOfMind(await getStateOfUser(user.id));
+        setSharer(user);
+        addListener(user);
       }
-    });
-  }, [])
+      else {
+        const sharer = await getSupporting(user.id);
+        if (sharer) {
+          setStateOfMind(await getStateOfUser(sharer.id));
+          setSharer(sharer);
+          addListener(sharer);
+        }
+      }
+    }
+
+    if (user) {
+      getStateOfMind(user);
+    }
+  }, [user])
 
   async function updateStateOfUser(state: string) {
     if (user) {

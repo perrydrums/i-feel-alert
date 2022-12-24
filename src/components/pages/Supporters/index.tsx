@@ -12,6 +12,7 @@ import Subtitle from "../../atoms/text/Subtitle";
 import Text from "../../atoms/text";
 import {supabase} from "../../../helpers/client";
 import {useUserContext} from "../../../context/User";
+import Gear from "../../atoms/svg/Gear";
 
 export default function Supporters() {
   const user = useUserContext();
@@ -70,7 +71,7 @@ export default function Supporters() {
 
   return (
     <>
-      <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>}/>
+      <Toolbar button={<LinkCircleButton to={'/me'}><Gear/></LinkCircleButton>}/>
       <div className="page">
         <Title>Supporters</Title>
         <div className="share-link-container">

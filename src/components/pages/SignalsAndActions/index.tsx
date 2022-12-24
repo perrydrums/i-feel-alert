@@ -13,6 +13,7 @@ import {useUserContext} from "../../../context/User";
 import AdviceItem from "../../molecules/AdviceItem";
 import {supabase} from "../../../helpers/client";
 import Loading from "../../atoms/Loading";
+import Gear from "../../atoms/svg/Gear";
 
 export default function SignalsAndActions() {
   const user = useUserContext();
@@ -86,7 +87,7 @@ export default function SignalsAndActions() {
 
   return !loading ? (
     <>
-      <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>} />
+      <Toolbar button={<LinkCircleButton to={'/me'}><Gear/></LinkCircleButton>} />
       <div className="page">
         <div style={{textAlign: 'center'}}>
           <h1>Signs & Actions</h1>

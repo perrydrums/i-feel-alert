@@ -15,6 +15,7 @@ import {LinkCircleButton} from "../../atoms/CircleButton";
 import {Advice, User} from "../../../helpers/types";
 import {useUserContext} from "../../../context/User";
 import {Helmet} from 'react-helmet';
+import Gear from "../../atoms/svg/Gear";
 
 export default function StateOfMind() {
   const user = useUserContext();
@@ -96,7 +97,7 @@ export default function StateOfMind() {
         <body className={stateOfMind} ></body>
       </Helmet>
       <Toolbar title={`Welcome, ${user?.name}`}
-               button={<LinkCircleButton state={stateOfMind} to="/me">⚙</LinkCircleButton>}
+               button={<LinkCircleButton state={stateOfMind} to="/me"><Gear/></LinkCircleButton>}
       />
       <div className="page">
         <div className="som-title-container">

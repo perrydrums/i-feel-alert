@@ -1,0 +1,8 @@
+.gear-icon {
+  width: 80%;
+  height: 100%;
+}
+
+.gear-icon > g > path {
+    fill: var(--color-toolbar-content);
+}

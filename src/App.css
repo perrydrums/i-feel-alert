@@ -31,30 +31,3 @@
 .theme--dark-default {
     color: white;
 }
-
-.bg--red {
-    background-color: var(--color-bg-red);
-}
-
-.bg--yellow {
-    background-color: var(--color-bg-yellow);
-}
-
-.bg--green {
-    background-color: var(--color-bg-green);
-}
-
-.bg--dark-red {
-    background-color: var(--color-text--red);
-    color: var(--color-bg-red);
-}
-
-.bg--dark-yellow {
-    background-color: var(--color-text--yellow);
-    color: var(--color-bg-yellow);
-}
-
-.bg--dark-green {
-    background-color: var(--color-text--green);
-    color: var(--color-bg-green);
-}

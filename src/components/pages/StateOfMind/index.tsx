@@ -72,8 +72,6 @@ export default function StateOfMind() {
     }
   }
 
-  const themeClass = stateOfMind === 'unknown' ? '' : `bg--${stateOfMind}`;
-
   const actionButtonText = () => {
     switch (true) {
       case stateOfMind === 'green':
@@ -88,12 +86,11 @@ export default function StateOfMind() {
   };
 
   return (
-    <>
+    <div className={stateOfMind}>
       <Toolbar title={`Welcome, ${user?.name}`}
-               state={stateOfMind}
                button={<LinkCircleButton state={stateOfMind} to="/me">⚙</LinkCircleButton>}
       />
-      <div className={'page ' + themeClass}>
+      <div className="page">
         <div className="som-title-container">
           {user?.type === 'sharer'
             ? <Title theme={stateOfMind}>I'm feeling</Title>
@@ -135,6 +132,6 @@ export default function StateOfMind() {
           </div>
         }
       </div>
-    </>
+    </div>
   );
 }

@@ -7,7 +7,7 @@ export default function StateFilter({onClick}: {onClick: (state: string) => any}
   const buttons = ['all', 'red', 'yellow', 'green'].map((state) => {
     const className = `state-filter-button ${state === 'all' 
       ? 'state-filter-button--all' 
-      : `bg--${state}`}
+      : `state-filter-button--${state}`}
     `;
 
     return (

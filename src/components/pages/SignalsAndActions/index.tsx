@@ -34,21 +34,21 @@ export default function SignalsAndActions() {
 
   const signalsHtmlInternal = signals.map((signal) => {
     if (signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <SignalElement signal={signal} key={`signal-${signal.id}`}/>
+      return <SignalElement signal={signal} border={true} key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const signalsHtmlExternal = signals.map((signal) => {
     if (!signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <SignalElement signal={signal} key={`signal-${signal.id}`}/>
+      return <SignalElement signal={signal} border={true} key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const actionsHtmlInternal = actions.map((action) => {
     if (action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <ActionElement action={action} key={`action-${action.id}`}/>
+      return <ActionElement action={action} border={true} key={`action-${action.id}`}/>
     }
 
     return null;
@@ -56,7 +56,7 @@ export default function SignalsAndActions() {
 
   const actionsHtmlExternal = actions.map((action) => {
     if (!action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <ActionElement action={action} key={`action-${action.id}`}/>
+      return <ActionElement action={action} border={true} key={`action-${action.id}`}/>
     }
 
     return null;

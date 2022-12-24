@@ -31,4 +31,5 @@
     font-size: 80px;
     text-transform: uppercase;
     font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+    color: var(--color-text);
 }

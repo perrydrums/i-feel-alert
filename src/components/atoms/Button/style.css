@@ -20,21 +20,8 @@
     font-size: 32px;
     text-transform: uppercase;
     line-height: 65px;
-}
-
-.button--text--red {
-    text-shadow: 3px 3px 0 var(--color-border--red);
-    color: var(--color-text--red);
-}
-
-.button--text--yellow {
-    text-shadow: 3px 3px 0 var(--color-border--yellow);
-    color: var(--color-text--yellow);
-}
-
-.button--text--green {
-    text-shadow: 3px 3px 0 var(--color-border--green--darker);
-    color: var(--color-text--green--lighter);
+    text-shadow: 3px 3px 0 var(--color-shadow);
+    color: var(--color-text);
 }
 
 @keyframes pulse {

@@ -1,10 +1,9 @@
 import React, {ReactNode} from 'react';
 import './style.css';
 
-export default function Toolbar({title = '', button = null, state = 'default'}: { title?: string, button?: ReactNode, state?: string }) {
-  const themeClass = state ? `bg--dark-${state}` : '';
+export default function Toolbar({title = '', button = null}: { title?: string, button?: ReactNode, state?: string }) {
   return (
-    <div className={`toolbar ${themeClass}`}>
+    <div className={`toolbar`}>
       <p className="toolbar--name">{title}</p>
       <div className="toolbar--button">
         {button || ''}

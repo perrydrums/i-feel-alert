@@ -40,19 +40,3 @@ ul li:before {
 .text--default {
     color: var(--color-text);
 }
-
-.text--red {
-    color: var(--color-text--red);
-}
-
-.text--yellow {
-    color: var(--color-text--yellow);
-}
-
-.text--green {
-    color: var(--color-text--green);
-}
-
-.text--inset {
-    /*padding: 0 16px;*/
-}

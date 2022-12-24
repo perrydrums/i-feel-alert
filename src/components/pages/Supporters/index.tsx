@@ -73,24 +73,17 @@ export default function Supporters() {
       <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>}/>
       <div className="page">
         <Title>Supporters</Title>
-        {shareApiAvailable
-          ? <div className="share-link-container">
-              <p>Share your support link:</p>
-              <Button text="Ask for support" onClick={shareSupportLink} />
-            </div>
-          : <>
-              <div className="share-link-container">
-                <Text>Send this link to someone you'd like to get support from:</Text>
-                <CopyToClipboard text={shareLink} onCopy={copySupportLink}>
-                  <pre className="share-link">{shareLink}</pre>
-                </CopyToClipboard>
-                {copied
-                  ? <span className={`share-link-copied fade-out`}>You've copied the link!</span>
-                  : <span>&nbsp;</span>
-                }
-              </div>
-            </>
-        }
+        <div className="share-link-container">
+          {shareApiAvailable && <Button text="Ask for support" onClick={shareSupportLink} />}
+          <Text>{shareApiAvailable ? 'Or send' : 'Send'} this link to someone you'd like to get support from:</Text>
+          <CopyToClipboard text={shareLink} onCopy={copySupportLink}>
+            <pre className="share-link">{shareLink}</pre>
+          </CopyToClipboard>
+          {copied
+            ? <span className={`share-link-copied fade-out`}>You've copied the link!</span>
+            : <span>&nbsp;</span>
+          }
+        </div>
         <div>
           <Subtitle>Your supporters</Subtitle>
           {loading

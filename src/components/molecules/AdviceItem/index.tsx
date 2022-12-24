@@ -3,13 +3,13 @@ import {Advice} from "../../../helpers/types";
 import './style.css';
 import {CircleButton} from "../../atoms/CircleButton";
 
-export default function AdviceItem({advice, editable}: {advice: Advice, editable?: boolean}) {
+export default function AdviceItem({advice, deleteFunction}: {advice: Advice, deleteFunction?: () => void}) {
   return (
-    <div className={`advice ${editable && `advice--${advice.state}`}`}
+    <div className={`advice ${deleteFunction ? `advice--${advice.state}` : ''}`}
          key={`advice-${advice.id}`}
     >
       <p>{advice.description}</p>
-      {editable && <CircleButton size="24px" onClick={() => {}}>🗑</CircleButton>}
+      {deleteFunction && <CircleButton size="24px" onClick={deleteFunction}>🗑</CircleButton>}
     </div>
   )
 }

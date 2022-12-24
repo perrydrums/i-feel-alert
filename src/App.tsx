@@ -15,17 +15,20 @@ import Supporters from "./components/pages/Supporters";
 import OfferSupport from "./components/pages/OfferSupport";
 import {UserContext} from "./context/User";
 import {User} from "./helpers/types";
+import Loading from "./components/atoms/Loading";
 
 function App() {
   const [user, setUser] = React.useState<User | null>();
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
     getCurrentUser().then(user => {
       setUser(user);
+      setLoading(false);
     });
   }, []);
 
-  return (
+  return !loading ? (
     <Router>
         {user ? (
           <UserContext.Provider value={user}>
@@ -43,12 +46,11 @@ function App() {
             <Route path="/register" element={<Register />}/>
             <Route path="/support/:sharerUserId" element={<OfferSupport />}/>
             <Route path="/" element={<Login />}/>
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="*" element={<></>} />
           </Routes>
         )}
     </Router>
-
-  );
+  ) : <Loading />;
 }
 
 export default App;

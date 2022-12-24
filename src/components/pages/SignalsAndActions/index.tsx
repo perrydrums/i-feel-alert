@@ -11,56 +11,80 @@ import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
 import {useUserContext} from "../../../context/User";
 import AdviceItem from "../../molecules/AdviceItem";
+import {supabase} from "../../../helpers/client";
+import Loading from "../../atoms/Loading";
 
 export default function SignalsAndActions() {
+  const user = useUserContext();
+  const [loading, setLoading] = React.useState(true);
   const [showForm, setShowForm] = React.useState(false);
   const [stateFilter, setStateFilter] = React.useState('all');
   const [signals, setSignals] = React.useState([] as Advice[]);
   const [actions, setActions] = React.useState([] as Advice[]);
-  const user = useUserContext();
 
   React.useEffect(() => {
     if (user) {
       getSignals(user.id).then((signals) => {
         setSignals(signals);
-      });
-      getActions(user.id).then((actions) => {
-        setActions(actions);
+        getActions(user.id).then((actions) => {
+          setActions(actions);
+          setLoading(false);
+        });
       });
     }
   }, [user]);
 
+  async function deleteFromDatabase(id: number, type: 'signal' | 'action') {
+    await supabase
+      .from(`${type}s`)
+      .delete()
+      .eq('id', id);
+
+    if (type === 'signal') {
+      setSignals(signals.filter(s => s.id !== id));
+    }
+    if (type === 'action') {
+      setActions(actions.filter(a => a.id !== id));
+    }
+  }
+
   const signalsHtmlInternal = signals.map((signal) => {
     if (signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <AdviceItem advice={signal} editable={true} key={`signal-${signal.id}`}/>
+      return <AdviceItem advice={signal}
+                         deleteFunction={() => deleteFromDatabase(signal.id, 'signal')}
+                         key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const signalsHtmlExternal = signals.map((signal) => {
     if (!signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <AdviceItem advice={signal} editable={true} key={`signal-${signal.id}`}/>
+      return <AdviceItem advice={signal}
+                         deleteFunction={() => deleteFromDatabase(signal.id, 'signal')}
+                         key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const actionsHtmlInternal = actions.map((action) => {
     if (action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <AdviceItem advice={action} editable={true} key={`action-${action.id}`}/>
+      return <AdviceItem advice={action}
+                         deleteFunction={() => deleteFromDatabase(action.id, 'action')}
+                         key={`action-${action.id}`}/>
     }
-
     return null;
   }).filter(a => a);
 
   const actionsHtmlExternal = actions.map((action) => {
     if (!action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <AdviceItem advice={action} editable={true} key={`action-${action.id}`}/>
+      return <AdviceItem advice={action}
+                         deleteFunction={() => deleteFromDatabase(action.id, 'action')}
+                         key={`action-${action.id}`}/>
     }
-
     return null;
   }).filter(a => a);
 
-  return (
+  return !loading ? (
     <>
       <Toolbar button={<LinkCircleButton to={'/me'}>⚙</LinkCircleButton>} />
       <div className="page">
@@ -106,5 +130,5 @@ export default function SignalsAndActions() {
         </div>
       </div>
     </>
-  )
+  ) : <Loading />;
 }

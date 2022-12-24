@@ -9,28 +9,27 @@ import ActionElement from "../../molecules/Action";
 import Subtitle from "../../atoms/text/Subtitle";
 import StateFilter from "../../atoms/StateFilter";
 import MiniSubtitle from "../../atoms/text/MiniSubtitle";
-import {getCurrentUser} from "../../../helpers/auth";
 import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
+import {useUserContext} from "../../../context/User";
 
 export default function SignalsAndActions() {
   const [showForm, setShowForm] = React.useState(false);
   const [stateFilter, setStateFilter] = React.useState('all');
   const [signals, setSignals] = React.useState([] as Signal[]);
   const [actions, setActions] = React.useState([] as Action[]);
+  const user = useUserContext();
 
   React.useEffect(() => {
-    getCurrentUser().then(user => {
-      if (user) {
-        getSignals(user.id).then((signals) => {
-          setSignals(signals);
-        });
-        getActions(user.id).then((actions) => {
-          setActions(actions);
-        });
-      }
-    });
-  }, []);
+    if (user) {
+      getSignals(user.id).then((signals) => {
+        setSignals(signals);
+      });
+      getActions(user.id).then((actions) => {
+        setActions(actions);
+      });
+    }
+  }, [user]);
 
   const signalsHtmlInternal = signals.map((signal) => {
     if (signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {

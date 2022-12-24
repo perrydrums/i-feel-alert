@@ -6,15 +6,15 @@ import Title from "../../atoms/text/Title";
 import {CircleButton, LinkCircleButton} from "../../atoms/CircleButton";
 import {getSupporters} from "../../../helpers/get";
 import {User} from "../../../helpers/types";
-import {getCurrentUser} from "../../../helpers/auth";
 import Button from "../../atoms/Button";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Subtitle from "../../atoms/text/Subtitle";
 import Text from "../../atoms/text";
 import {supabase} from "../../../helpers/client";
+import {useUserContext} from "../../../context/User";
 
 export default function Supporters() {
-  const [user, setUser] = React.useState<User | null>(null);
+  const user = useUserContext();
   const [supporters, setSupporters] = React.useState([] as User[]);
   const [loading, setLoading] = React.useState(true);
   const [shareApiAvailable, setShareApiAvailable] = React.useState(false);
@@ -22,17 +22,14 @@ export default function Supporters() {
   const shareLink = user ? `${window.location.origin}/support/${user?.id}` : '';
 
   React.useEffect(() => {
-    getCurrentUser().then(user => {
-      if (user) {
-        getSupporters(user.id).then((supporters) => {
-          setSupporters(supporters);
-          setLoading(false);
-        });
-        setUser(user);
-        setShareApiAvailable(!!navigator.share);
-      }
-    });
-  }, []);
+    if (user) {
+      getSupporters(user.id).then((supporters) => {
+        setSupporters(supporters);
+        setLoading(false);
+      });
+      setShareApiAvailable(!!navigator.share);
+    }
+  }, [user]);
 
   function disconnectSupporter(supporterId: string) {
     supabase

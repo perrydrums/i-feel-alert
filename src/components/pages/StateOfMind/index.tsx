@@ -14,11 +14,12 @@ import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
 import {getCurrentUser} from "../../../helpers/auth";
 import {User} from "../../../helpers/types";
+import {useUserContext} from "../../../context/User";
 
 export default function StateOfMind() {
   const [stateOfMind, setStateOfMind] = React.useState('unknown');
   const [show, setShow] = React.useState('all');
-  const [user, setUser] = React.useState<User>();
+  const user = useUserContext();
   const [sharer, setSharer] = React.useState<User>();
 
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
@@ -31,7 +32,6 @@ export default function StateOfMind() {
   React.useEffect(() => {
     getCurrentUser().then(user => {
       if (user) {
-        setUser(user);
         const tempSharer = user;
         if (user.type === 'sharer') {
           getStateOfUser(user.id).then((state) => {

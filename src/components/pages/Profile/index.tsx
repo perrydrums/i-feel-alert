@@ -3,20 +3,12 @@ import '../style.css'
 import Toolbar from "../../molecules/Toolbar";
 import ButtonLink from "../../atoms/Button/ButtonLink";
 import Button from "../../atoms/Button";
-import {getCurrentUser, logout} from "../../../helpers/auth";
+import {logout} from "../../../helpers/auth";
 import {LinkCircleButton} from "../../atoms/CircleButton";
-import {User} from "../../../helpers/types";
+import {useUserContext} from "../../../context/User";
 
 export default function Profile() {
-  const [user, setUser] = React.useState<User>()
-
-  React.useEffect(() => {
-    getCurrentUser().then(user => {
-      if (user) {
-        setUser(user);
-      }
-    });
-  }, []);
+  const user = useUserContext();
 
   return (
     <>

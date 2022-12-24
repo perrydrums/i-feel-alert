@@ -6,20 +6,23 @@ import Text from '../../atoms/text';
 import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Button from "../../atoms/Button";
-import {getStateOfUser, getSupporting} from "../../../helpers/get";
+import {getActions, getSignals, getStateOfUser, getSupporting} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 import {sendMessage} from "../../../helpers/whatsapp";
 import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
-import {User} from "../../../helpers/types";
+import {Advice, User} from "../../../helpers/types";
 import {useUserContext} from "../../../context/User";
+import {Helmet} from 'react-helmet';
 
 export default function StateOfMind() {
   const user = useUserContext();
   const [stateOfMind, _setStateOfMind] = React.useState(localStorage.getItem('lastStateOfMind') || 'unknown');
   const [show, setShow] = React.useState('all');
   const [sharer, setSharer] = React.useState<User>();
+  const [actions, setActions] = React.useState([] as Advice[]);
+  const [signals, setSignals] = React.useState([] as Advice[]);
 
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
   const scroll = () => {
@@ -37,7 +40,7 @@ export default function StateOfMind() {
     const addListener = (sharer: User) => {
       supabase
         .channel('public:user_state')
-        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'user_state' }, payload => {
+        .on('postgres_changes', {event: 'UPDATE', schema: 'public', table: 'user_state'}, payload => {
           if (payload.new.user_id === sharer.id) {
             setStateOfMind(payload.new.state);
           }
@@ -46,25 +49,21 @@ export default function StateOfMind() {
     }
 
     const getStateOfMind = async (user: User) => {
-      if (user.type === 'sharer') {
-        setStateOfMind(await getStateOfUser(user.id));
-        setSharer(user);
-        addListener(user);
-      }
-      else {
-        const sharer = await getSupporting(user.id);
-        if (sharer) {
-          setStateOfMind(await getStateOfUser(sharer.id));
-          setSharer(sharer);
-          addListener(sharer);
-        }
+      const sharer = user.type === 'sharer' ? user : await getSupporting(user.id);
+      if (sharer) {
+        const state = await getStateOfUser(sharer.id);
+        setStateOfMind(state);
+        setSharer(sharer);
+        addListener(sharer);
+        setActions(await getActions(user.id, {state, internal: user.type === 'sharer'}))
+        setSignals(await getSignals(user.id, {state, internal: user.type === 'sharer'}))
       }
     }
 
     if (user) {
       getStateOfMind(user);
     }
-  }, [user])
+  }, [user, stateOfMind]);
 
   async function updateStateOfUser(state: string) {
     if (user) {
@@ -92,7 +91,10 @@ export default function StateOfMind() {
   };
 
   return (
-    <div className={stateOfMind}>
+    <>
+      <Helmet>
+        <body className={stateOfMind} ></body>
+      </Helmet>
       <Toolbar title={`Welcome, ${user?.name}`}
                button={<LinkCircleButton state={stateOfMind} to="/me">⚙</LinkCircleButton>}
       />
@@ -101,7 +103,7 @@ export default function StateOfMind() {
           {user?.type === 'sharer'
             ? <Title theme={stateOfMind}>I'm feeling</Title>
             : <>
-              <Text theme={stateOfMind}>{sharer?.name || '&nbsp;'}</Text>
+              <Text theme={stateOfMind}>{sharer?.name || <>&nbsp;</>}</Text>
               <Title theme={stateOfMind}>currently feels</Title>
             </>
           }
@@ -129,15 +131,15 @@ export default function StateOfMind() {
         }
         {show === 'actions' &&
           <div ref={howToHelpRef}>
-            <HowToHelp state={stateOfMind} userType={user?.type || ''} />
+            <HowToHelp items={actions} state={stateOfMind}/>
           </div>
         }
         {show === 'signs' &&
           <div ref={howToHelpRef}>
-            <WhatAreTheSigns state={stateOfMind} userType={user?.type || ''} />
+            <WhatAreTheSigns items={signals} state={stateOfMind}/>
           </div>
         }
       </div>
-    </div>
+    </>
   );
 }

@@ -1,4 +1,4 @@
-.signal {
+.advice {
     padding: 10px 13px;
     margin: 8px 0 16px 0;
     font-size: 18px;
@@ -8,20 +8,21 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-left: 6px solid var(--color-bg);
 }
 
-.signal:last-child {
+.advice:last-child {
     margin-bottom: 24px;
 }
 
-.signal--red {
+.advice--red {
     border-left: 6px solid var(--color-bg-red);
 }
 
-.signal--yellow {
+.advice--yellow {
     border-left: 6px solid var(--color-bg-yellow);
 }
 
-.signal--green {
+.advice--green {
     border-left: 6px solid var(--color-bg-green);
 }

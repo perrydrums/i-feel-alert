@@ -1,12 +1,4 @@
-export interface Signal {
-  id: number;
-  user_id: string;
-  state: string;
-  internal: boolean;
-  description: string;
-}
-
-export interface Action {
+export interface Advice {
   id: number;
   user_id: string;
   state: string;

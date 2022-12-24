@@ -3,21 +3,20 @@ import './style.css';
 import Button from "../../atoms/Button";
 import NewSignOrActionForm from "../../organisms/forms/NewSignOrActionForm";
 import {getSignals, getActions} from "../../../helpers/get";
-import {Action, Signal} from "../../../helpers/types";
-import SignalElement from "../../molecules/Signal";
-import ActionElement from "../../molecules/Action";
+import {Advice} from "../../../helpers/types";
 import Subtitle from "../../atoms/text/Subtitle";
 import StateFilter from "../../atoms/StateFilter";
 import MiniSubtitle from "../../atoms/text/MiniSubtitle";
 import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
 import {useUserContext} from "../../../context/User";
+import AdviceItem from "../../molecules/AdviceItem";
 
 export default function SignalsAndActions() {
   const [showForm, setShowForm] = React.useState(false);
   const [stateFilter, setStateFilter] = React.useState('all');
-  const [signals, setSignals] = React.useState([] as Signal[]);
-  const [actions, setActions] = React.useState([] as Action[]);
+  const [signals, setSignals] = React.useState([] as Advice[]);
+  const [actions, setActions] = React.useState([] as Advice[]);
   const user = useUserContext();
 
   React.useEffect(() => {
@@ -33,21 +32,21 @@ export default function SignalsAndActions() {
 
   const signalsHtmlInternal = signals.map((signal) => {
     if (signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <SignalElement signal={signal} border={true} key={`signal-${signal.id}`}/>
+      return <AdviceItem advice={signal} editable={true} key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const signalsHtmlExternal = signals.map((signal) => {
     if (!signal.internal && (stateFilter === 'all' || stateFilter === signal.state)) {
-      return <SignalElement signal={signal} border={true} key={`signal-${signal.id}`}/>
+      return <AdviceItem advice={signal} editable={true} key={`signal-${signal.id}`}/>
     }
     return null;
   }).filter(a => a);
 
   const actionsHtmlInternal = actions.map((action) => {
     if (action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <ActionElement action={action} border={true} key={`action-${action.id}`}/>
+      return <AdviceItem advice={action} editable={true} key={`action-${action.id}`}/>
     }
 
     return null;
@@ -55,7 +54,7 @@ export default function SignalsAndActions() {
 
   const actionsHtmlExternal = actions.map((action) => {
     if (!action.internal && (stateFilter === 'all' || stateFilter === action.state)) {
-      return <ActionElement action={action} border={true} key={`action-${action.id}`}/>
+      return <AdviceItem advice={action} editable={true} key={`action-${action.id}`}/>
     }
 
     return null;

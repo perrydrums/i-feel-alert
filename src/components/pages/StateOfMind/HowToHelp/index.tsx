@@ -1,31 +1,17 @@
 import React from 'react';
 import Subtitle from "../../../atoms/text/Subtitle";
 import './style.css';
-import {Action} from "../../../../helpers/types";
-import {getActions} from "../../../../helpers/get";
-import ActionElement from "../../../molecules/Action";
-import {getCurrentUser} from "../../../../helpers/auth";
+import {Advice} from "../../../../helpers/types";
+import AdviceItem from "../../../molecules/AdviceItem";
 
-export default function HowToHelp({state = 'default', userType}: {state: string, userType: string}) {
-  const [actions, setActions] = React.useState([] as Action[]);
-
-  React.useEffect(() => {
-    getCurrentUser().then(user => {
-      if (user) {
-        getActions(user.id, {state, internal: user.type === 'sharer'}).then((actions) => {
-          setActions(actions);
-        });
-      }
-    });
-  }, [state, userType]);
-
-  const actionsHtml = actions.map((action) => <ActionElement action={action} key={`action-${action.id}`}/>);
+export default function HowToHelp({items, state = 'default'}: {items: Advice[], state: string}) {
+  const adviceHtml = items.map((advice) => <AdviceItem advice={advice} key={`action-${advice.id}`}/>);
 
   return (
     <div className="how-to-help">
       <Subtitle theme={state}>What you can do:</Subtitle>
       <div>
-        {actionsHtml}
+        {adviceHtml}
       </div>
     </div>
   );

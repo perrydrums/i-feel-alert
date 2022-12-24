@@ -1,5 +1,5 @@
 import {supabase} from "./client";
-import {Action, Signal, User} from "./types";
+import {Advice, User} from "./types";
 
 export async function getStateOfUser(userId: string): Promise<string> {
   const {data} = await supabase
@@ -11,7 +11,7 @@ export async function getStateOfUser(userId: string): Promise<string> {
   return data ? data[0]?.state : 'unknown';
 }
 
-export async function getSignals(userId: string, filter?: { state?: string, internal?: boolean }): Promise<Signal[]> {
+export async function getSignals(userId: string, filter?: { state?: string, internal?: boolean }): Promise<Advice[]> {
   const query = supabase
     .from('signals')
     .select()
@@ -29,7 +29,7 @@ export async function getSignals(userId: string, filter?: { state?: string, inte
   return data ? data : [];
 }
 
-export async function getActions(userId: string, filter?: { state?: string, internal?: boolean }): Promise<Action[]> {
+export async function getActions(userId: string, filter?: { state?: string, internal?: boolean }): Promise<Advice[]> {
   const query = supabase
     .from('actions')
     .select()

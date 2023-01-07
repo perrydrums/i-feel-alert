@@ -28,10 +28,16 @@
     --color-border--green--25: rgba(56, 228, 174, 0.25);
 
     --border-radius: 6px;
+    --color-button-text: var(--color-text);
+}
+
+.black {
+    --color-button-text: var(--color-text--white);
 }
 
 .red {
     --color-text: #FFA5A0;
+    --color-button-text: var(--color-text);
     --color-bg: #9E2B25;
     --color-toolbar: #FFA5A0;
     --color-toolbar-content: var(--color-bg);
@@ -43,6 +49,7 @@
 
 .yellow {
     --color-text: #554715;
+    --color-button-text: var(--color-text);
     --color-bg: #E2C044;
     --color-toolbar: #554715;
     --color-toolbar-content: var(--color-bg);
@@ -54,6 +61,7 @@
 
 .green {
     --color-text: #38E4AE;
+    --color-button-text: var(--color-text);
     --color-bg: #009067;
     --color-toolbar: #38E4AE;
     --color-toolbar-content: var(--color-bg);

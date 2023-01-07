@@ -14,6 +14,7 @@ import AdviceItem from "../../molecules/AdviceItem";
 import {supabase} from "../../../helpers/client";
 import Loading from "../../atoms/Loading";
 import Gear from "../../atoms/svg/Gear";
+import {Helmet} from "react-helmet";
 
 export default function SignalsAndActions() {
   const user = useUserContext();
@@ -87,6 +88,9 @@ export default function SignalsAndActions() {
 
   return !loading ? (
     <>
+      <Helmet>
+        <body className="black" ></body>
+      </Helmet>
       <Toolbar button={<LinkCircleButton to={'/me'}><Gear/></LinkCircleButton>} />
       <div className="page">
         <div style={{textAlign: 'center'}}>

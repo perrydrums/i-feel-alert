@@ -6,12 +6,16 @@ import Button from "../../atoms/Button";
 import {logout} from "../../../helpers/auth";
 import {LinkCircleButton} from "../../atoms/CircleButton";
 import {useUserContext} from "../../../context/User";
+import {Helmet} from "react-helmet";
 
 export default function Profile() {
   const user = useUserContext();
 
   return (
     <>
+      <Helmet>
+        <body className="black" ></body>
+      </Helmet>
       <Toolbar title={`${user?.name}'s Profile`}
                button={<LinkCircleButton to={'/'}>⦾</LinkCircleButton>}
       />

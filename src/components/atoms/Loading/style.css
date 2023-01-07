@@ -3,6 +3,19 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    z-index: -10;
+}
+
+.loading-small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -10;
 }
 
 .loading__spinner--1 {
@@ -12,6 +25,7 @@
     border-radius: 50%;
     animation: spin .4s linear infinite, growAndFade 2s linear infinite;
     position: fixed;
+    z-index: -10;
 }
 
 .loading__spinner--2 {
@@ -23,6 +37,7 @@
     animation: spin .4s linear infinite, growAndFade 2s linear infinite;
     animation-delay: .3s;
     position: fixed;
+    z-index: -10;
 }
 
 .loading__spinner--3 {
@@ -34,6 +49,7 @@
     animation: spin .4s linear infinite, growAndFade 2s linear infinite;
     animation-delay: .6s;
     position: fixed;
+    z-index: -10;
 }
 
 @keyframes spin {

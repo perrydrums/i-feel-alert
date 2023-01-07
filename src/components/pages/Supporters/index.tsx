@@ -13,6 +13,7 @@ import Text from "../../atoms/text";
 import {supabase} from "../../../helpers/client";
 import {useUserContext} from "../../../context/User";
 import Gear from "../../atoms/svg/Gear";
+import {Helmet} from "react-helmet";
 
 export default function Supporters() {
   const user = useUserContext();
@@ -71,6 +72,9 @@ export default function Supporters() {
 
   return (
     <>
+      <Helmet>
+        <body className="black" ></body>
+      </Helmet>
       <Toolbar button={<LinkCircleButton to={'/me'}><Gear/></LinkCircleButton>}/>
       <div className="page">
         <Title>Supporters</Title>

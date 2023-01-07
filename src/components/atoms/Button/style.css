@@ -21,7 +21,7 @@
     text-transform: uppercase;
     line-height: 65px;
     text-shadow: 3px 3px 0 var(--color-shadow);
-    color: var(--color-text);
+    color: var(--color-button-text);
 }
 
 @keyframes pulse {

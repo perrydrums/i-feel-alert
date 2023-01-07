@@ -39,6 +39,7 @@ export default function NewSignOrActionForm() {
       />
       <Radio options={['red', 'yellow', 'green']}
              name="state"
+             addClassesOnSelected={{ red: 'input--radio-item--red', yellow: 'input--radio-item--yellow', green: 'input--radio-item--green' }}
              onChange={(value) => { setState(value) }}
       />
       <Radio options={['internal', 'external']}

@@ -21,7 +21,7 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={onSubmit}
-          className="new-sign-or-action-form"
+          className="login-form"
     >
       <TextField name="email"
                  onChange={(value) => { setEmail(value) }}

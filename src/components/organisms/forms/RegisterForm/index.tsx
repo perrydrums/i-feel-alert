@@ -1,14 +1,13 @@
 import React  from 'react';
-import Radio from "../../../atoms/inputs/Radio";
 import TextField from "../../../atoms/inputs/TextField";
 import Submit from "../../../atoms/inputs/Submit";
 import './style.css';
 import {register} from "../../../../helpers/auth";
 import Title from "../../../atoms/text/Title";
 import Button from "../../../atoms/Button";
+import {supabase} from "../../../../helpers/client";
 
-export default function RegisterForm() {
-  const [type, setType] = React.useState('');
+export default function RegisterForm({type, shareUserId}: {type: 'sharer' | 'supporter', shareUserId?: string}) {
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
@@ -17,11 +16,20 @@ export default function RegisterForm() {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const success = await register({
+    const userId = await register({
       email, password, type, name
     });
 
-    if (success) {
+    if (shareUserId) {
+      await supabase
+        .from('sharer_supporter')
+        .insert({
+          sharer_id: shareUserId,
+          supporter_id: userId,
+        });
+    }
+
+    if (userId) {
       setSuccess(true);
     }
   };
@@ -35,10 +43,6 @@ export default function RegisterForm() {
     <form onSubmit={onSubmit}
           className="new-sign-or-action-form"
     >
-      <Radio options={['sharer', 'listener']}
-             name="type"
-             onChange={(value) => { setType(value) }}
-      />
       <TextField name="email"
                  onChange={(value) => { setEmail(value) }}
       />
@@ -48,7 +52,7 @@ export default function RegisterForm() {
       <TextField name="name"
                  onChange={(value) => { setName(value) }}
       />
-      <Submit name="Submit" />
+      <Submit name="Create new account" />
     </form>
   )
 }

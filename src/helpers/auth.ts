@@ -40,7 +40,7 @@ export async function register({email, password, type, name}: {
   password: string,
   type: string,
   name: string,
-}) {
+}): Promise<string | null> {
   const { data: { user } } = await supabase.auth.signUp({
     email,
     password: sha256(password).toString(),
@@ -58,11 +58,11 @@ export async function register({email, password, type, name}: {
     }
 
     if (!error) {
-      return true;
+      return user.id;
     }
   }
 
-  return false;
+  return null;
 }
 
 export async function login(email: string, password: string) {
@@ -73,6 +73,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function logout() {
+  localStorage.removeItem('lastStateOfMind');
   await supabase.auth.signOut();
   window.location.assign('/');
 }

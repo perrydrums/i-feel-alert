@@ -4,8 +4,9 @@ import Submit from "../../../atoms/inputs/Submit";
 import './style.css';
 import {login} from "../../../../helpers/auth";
 import Password from "../../../atoms/inputs/Password";
+import {supabase} from "../../../../helpers/client";
 
-export default function LoginForm() {
+export default function LoginForm({shareUserId}: {shareUserId?: string}) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -15,6 +16,15 @@ export default function LoginForm() {
     const userAccount = await login(email, password);
 
     if (!userAccount.error) {
+      if (shareUserId) {
+        await supabase
+          .from('sharer_supporter')
+          .insert({
+            sharer_id: shareUserId,
+            supporter_id: userAccount.data.user?.id,
+          });
+      }
+
       window.location.href = '/';
     }
   };
@@ -23,6 +33,7 @@ export default function LoginForm() {
     <form onSubmit={onSubmit}
           className="login-form"
     >
+      <h3 style={{textAlign: 'center', marginBottom: '24px'}}>Login</h3>
       <TextField name="email"
                  onChange={(value) => { setEmail(value) }}
       />

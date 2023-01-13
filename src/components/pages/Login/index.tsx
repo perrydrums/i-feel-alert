@@ -10,9 +10,10 @@ export default function Login() {
       <Helmet>
         <body className="black" ></body>
       </Helmet>
-      <Loading small={true}/>
+      <Loading small={true} text="ifeel/ALERT"/>
+      <div style={{marginTop: '260px'}} />
       <LoginForm />
-      <ButtonLink text="Register" to="/register" />
+      <ButtonLink text="Create new account" to="/register" />
     </div>
   )
 }

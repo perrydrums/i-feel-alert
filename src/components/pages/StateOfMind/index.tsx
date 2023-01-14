@@ -117,6 +117,7 @@ export default function StateOfMind() {
               {(show === 'all' || show === 'signs') &&
                 <Button state={stateOfMind}
                         text={actionButtonText()}
+                        pulse={true}
                         onClick={async () => {
                           await setShow('actions');
                           scroll();
@@ -126,6 +127,7 @@ export default function StateOfMind() {
               {(show === 'all' || show === 'actions') &&
                 <Button state={stateOfMind}
                         text="What are the signs?"
+                        pulse={true}
                         onClick={async () => {
                           await setShow('signs');
                           scroll();

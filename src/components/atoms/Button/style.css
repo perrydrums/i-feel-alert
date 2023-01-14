@@ -6,13 +6,16 @@
     height: 70px;
     border-radius: 35px;
     margin: 40px auto;
+    cursor: pointer;
+    color: white;
+    text-align: center;
+}
+
+.button--animation {
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
     animation-name: pulse;
     animation-timing-function: ease-out;
-    cursor: pointer;
-    color: white;
-    text-align: center;
 }
 
 .button--text {

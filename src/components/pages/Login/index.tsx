@@ -6,11 +6,13 @@ import Loading from "../../atoms/Loading";
 
 export default function Login() {
   return (
-    <div className="page">
+    <div className="page relative">
       <Helmet>
         <body className="black" ></body>
       </Helmet>
-      <Loading small={true} text="ifeel/ALERT"/>
+      <div className="no-overflow">
+        <Loading small={true} text="ifeel/ALERT"/>
+      </div>
       <div style={{marginTop: '260px'}} />
       <LoginForm />
       <ButtonLink text="Create new account" to="/register" />

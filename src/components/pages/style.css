@@ -3,3 +3,11 @@
     margin-top: 0;
     padding: 24px;
 }
+
+.relative {
+    position: relative;
+}
+
+.no-overflow {
+    overflow: hidden;
+}

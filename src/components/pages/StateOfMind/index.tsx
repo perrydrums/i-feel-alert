@@ -9,13 +9,13 @@ import Button from "../../atoms/Button";
 import {getActions, getSignals, getStateOfUser, getSupporting} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
-import {sendMessage} from "../../../helpers/whatsapp";
 import Toolbar from "../../molecules/Toolbar";
 import {LinkCircleButton} from "../../atoms/CircleButton";
 import {Advice, User} from "../../../helpers/types";
 import {useUserContext} from "../../../context/User";
 import {Helmet} from 'react-helmet';
 import Gear from "../../atoms/svg/Gear";
+import {email} from "../../../helpers/notify";
 
 export default function StateOfMind() {
   const user = useUserContext();
@@ -73,8 +73,8 @@ export default function StateOfMind() {
         .update({state: state})
         .eq('user_id', user.id);
 
-      await sendMessage('31650126861', `${user.name} is feeling ${state} now. Please check on him. For help visit https://ifeel-alert.netlify.app`);
       setStateOfMind(state);
+      email(user.id);
     }
   }
 

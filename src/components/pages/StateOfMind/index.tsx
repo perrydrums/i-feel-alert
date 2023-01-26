@@ -16,8 +16,10 @@ import {useUserContext} from "../../../context/User";
 import {Helmet} from 'react-helmet';
 import Gear from "../../atoms/svg/Gear";
 import {email} from "../../../helpers/notify";
+import Loading from "../../atoms/Loading";
 
 export default function StateOfMind() {
+  const [loading, setLoading] = React.useState(true);
   const user = useUserContext();
   const [stateOfMind, _setStateOfMind] = React.useState(localStorage.getItem('lastStateOfMind') || 'unknown');
   const [show, setShow] = React.useState('all');
@@ -59,6 +61,7 @@ export default function StateOfMind() {
         setActions(await getActions(user.id, {state, internal: user.type === 'sharer'}))
         setSignals(await getSignals(user.id, {state, internal: user.type === 'sharer'}))
       }
+      setLoading(false);
     }
 
     if (user) {
@@ -104,52 +107,59 @@ export default function StateOfMind() {
                button={<LinkCircleButton state={stateOfMind} to="/me"><Gear/></LinkCircleButton>}
       />
       <div className="page">
-        {sharer
-          ? <>
-              <div className="som-title-container">
-                {user?.type === 'sharer'
-                  ? <Title theme={stateOfMind}>I'm feeling</Title>
-                  : <>
-                    <Text theme={stateOfMind}>{sharer?.name || <>&nbsp;</>}</Text>
-                    <Title theme={stateOfMind}>currently feels</Title>
-                  </>
+        {loading
+          ? <div style={{marginTop: '150px'}}>
+              <Loading small={true} themed={true} />
+            </div>
+          : <>
+            {sharer
+              ? <>
+                <div className="som-title-container">
+                  {user?.type === 'sharer'
+                    ? <Title theme={stateOfMind}>I'm feeling</Title>
+                    : <>
+                      <Text theme={stateOfMind}>{sharer?.name || <>&nbsp;</>}</Text>
+                      <Title theme={stateOfMind}>currently feels</Title>
+                    </>
+                  }
+                </div>
+                <StateIndicator state={stateOfMind}
+                                update={user?.type === 'sharer' ? updateStateOfUser : null}
+                />
+                {(show === 'all' || show === 'signs') &&
+                  <Button state={stateOfMind}
+                          text={actionButtonText()}
+                          pulse={true}
+                          onClick={async () => {
+                            await setShow('actions');
+                            scroll();
+                          }}
+                  />
                 }
-              </div>
-              <StateIndicator state={stateOfMind}
-                              update={user?.type === 'sharer' ? updateStateOfUser : null}
-              />
-              {(show === 'all' || show === 'signs') &&
-                <Button state={stateOfMind}
-                        text={actionButtonText()}
-                        pulse={true}
-                        onClick={async () => {
-                          await setShow('actions');
-                          scroll();
-                        }}
-                />
-              }
-              {(show === 'all' || show === 'actions') &&
-                <Button state={stateOfMind}
-                        text="What are the signs?"
-                        pulse={true}
-                        onClick={async () => {
-                          await setShow('signs');
-                          scroll();
-                        }}
-                />
-              }
-              {show === 'actions' &&
-                <div ref={howToHelpRef}>
-                  <HowToHelp items={actions} state={stateOfMind}/>
-                </div>
-              }
-              {show === 'signs' &&
-                <div ref={howToHelpRef}>
-                  <WhatAreTheSigns items={signals} state={stateOfMind}/>
-                </div>
-              }
-            </>
-          : <>You are not supporting someone right now.</>
+                {(show === 'all' || show === 'actions') &&
+                  <Button state={stateOfMind}
+                          text="What are the signs?"
+                          pulse={true}
+                          onClick={async () => {
+                            await setShow('signs');
+                            scroll();
+                          }}
+                  />
+                }
+                {show === 'actions' &&
+                  <div ref={howToHelpRef}>
+                    <HowToHelp items={actions} state={stateOfMind}/>
+                  </div>
+                }
+                {show === 'signs' &&
+                  <div ref={howToHelpRef}>
+                    <WhatAreTheSigns items={signals} state={stateOfMind}/>
+                  </div>
+                }
+              </>
+              : <>You are not supporting someone right now.</>
+            }
+          </>
         }
       </div>
     </>

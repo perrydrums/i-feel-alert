@@ -1,42 +1,42 @@
 p {
-    font-size: 18px;
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue', sans-serif;
+  font-size: 18px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue", sans-serif;
 }
 
 h1 {
-    font-size: 54px;
-    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+  font-size: 54px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
 }
 
 h2 {
-    font-size: 42px;
-    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+  font-size: 42px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
 }
 
 h3 {
-    font-size: 24px;
-    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+  font-size: 24px;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
 }
 
 ul {
-    list-style: none;
-    font-size: 18px;
-    margin: 8px 0 0 0;
-    padding: 0;
+  list-style: none;
+  font-size: 18px;
+  margin: 8px 0 0 0;
+  padding: 0;
 }
 
 ul li {
-    margin-left: 0;
-    position: relative;
-    padding: 0 0 4px 24px;
+  margin-left: 0;
+  position: relative;
+  padding: 0 0 4px 24px;
 }
 ul li:before {
-    content: "○";
-    position: absolute;
-    top: 0;
-    left: 0;
+  content: "○";
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .text--default {
-    color: var(--color-text);
+  color: var(--color-text);
 }

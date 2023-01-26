@@ -1,33 +1,33 @@
 .theme--red {
-    color: var(--color-text--red);
-    border-color: var(--color-border--red);
+  color: var(--color-text--red);
+  border-color: var(--color-border--red);
 }
 
 .theme--yellow {
-    color: var(--color-text--yellow);
-    border-color: var(--color-border--yellow);
+  color: var(--color-text--yellow);
+  border-color: var(--color-border--yellow);
 }
 
 .theme--green {
-    color: var(--color-text--green);
-    border-color: var(--color-border--green);
+  color: var(--color-text--green);
+  border-color: var(--color-border--green);
 }
 
 .theme--dark-red {
-    color: var(--color-border--red);
-    border-color: var(--color-border--red);
+  color: var(--color-border--red);
+  border-color: var(--color-border--red);
 }
 
 .theme--dark-yellow {
-    color: var(--color-border--yellow);
-    border-color: var(--color-border--yellow);
+  color: var(--color-border--yellow);
+  border-color: var(--color-border--yellow);
 }
 
 .theme--dark-green {
-    color: var(--color-bg-green);
-    border-color: var(--color-text--green);
+  color: var(--color-bg-green);
+  border-color: var(--color-text--green);
 }
 
 .theme--dark-default {
-    color: white;
+  color: white;
 }

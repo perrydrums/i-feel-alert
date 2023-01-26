@@ -1,25 +1,25 @@
-import {ServerClient} from 'postmark'
+import { ServerClient } from "postmark";
 import { HandlerEvent, HandlerContext } from "@netlify/functions";
-import {User} from "../../src/helpers/types";
+import { User } from "../../src/helpers/types";
 
-const client = new ServerClient(process.env.REACT_APP_POSTMARK_TOKEN || '')
+const client = new ServerClient(process.env.REACT_APP_POSTMARK_TOKEN || "");
 const handler = async (event: HandlerEvent, context: HandlerContext) => {
-  if (event.headers.referer?.includes('ifeel-alert.netlify.app')) {
-    const supporters: [User] = JSON.parse(event.body || '').supporters;
-    const sharer: User = JSON.parse(event.body || '').sharer;
-    const state: string = JSON.parse(event.body || '').state;
+  if (event.headers.referer?.includes("ifeel-alert.netlify.app")) {
+    const supporters: [User] = JSON.parse(event.body || "").supporters;
+    const sharer: User = JSON.parse(event.body || "").sharer;
+    const state: string = JSON.parse(event.body || "").state;
 
     if (supporters && sharer && state) {
       const actions = supporters.map((supporter) => {
         return {
           To: supporter.email,
-          From: 'info@perryjanssen.nl',
+          From: "info@perryjanssen.nl",
           TemplateAlias: `mood-${state}`,
           TemplateModel: {
             supporterName: supporter.name,
             sharerName: sharer.name,
-            company_name: 'ifeel/ALERT',
-            product_name: 'ifeel/ALERT',
+            company_name: "ifeel/ALERT",
+            product_name: "ifeel/ALERT",
           },
         };
       });
@@ -32,14 +32,14 @@ const handler = async (event: HandlerEvent, context: HandlerContext) => {
     } else {
       return {
         statusCode: 400,
-        body: 'No emailAddresses provided',
+        body: "No emailAddresses provided",
       };
     }
   } else {
     return {
       statusCode: 401,
-      body: JSON.stringify('Unauthorized')
-    }
+      body: JSON.stringify("Unauthorized"),
+    };
   }
 };
 

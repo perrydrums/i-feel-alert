@@ -1,28 +1,28 @@
 .advice {
-    padding: 10px 13px;
-    margin: 8px 0 16px 0;
-    font-size: 18px;
-    background-color: var(--color-text--light-gray);
-    color: var(--color-text--default);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: var(--border-radius);
+  padding: 10px 13px;
+  margin: 8px 0 16px 0;
+  font-size: 18px;
+  background-color: var(--color-text--light-gray);
+  color: var(--color-text--default);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: var(--border-radius);
 }
 
 .advice:last-child {
-    margin-bottom: 24px;
+  margin-bottom: 24px;
 }
 
 .advice--red {
-    border-left: 6px solid var(--color-bg-red);
+  border-left: 6px solid var(--color-bg-red);
 }
 
 .advice--yellow {
-    border-left: 6px solid var(--color-bg-yellow);
+  border-left: 6px solid var(--color-bg-yellow);
 }
 
 .advice--green {
-    border-left: 6px solid var(--color-bg-green);
+  border-left: 6px solid var(--color-bg-green);
 }

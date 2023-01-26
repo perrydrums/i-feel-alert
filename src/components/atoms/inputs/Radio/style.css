@@ -1,69 +1,69 @@
 .input--radio-container {
-    display: flex;
-    width: 100%;
-    margin-bottom: 42px;
-    align-items: stretch;
+  display: flex;
+  width: 100%;
+  margin-bottom: 42px;
+  align-items: stretch;
 }
 
 .input--radio-container > div {
-    flex: 1;
-    align-self: center;
+  flex: 1;
+  align-self: center;
 }
 
 .input--radio-container > div > input {
-    display: none;
+  display: none;
 }
 
-.input--radio-container > div > input:checked+label {
-    background-color: var(--color-bg);
-    border: 4px solid #f5f5f5;
-    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
+.input--radio-container > div > input:checked + label {
+  background-color: var(--color-bg);
+  border: 4px solid #f5f5f5;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
 }
 
 .input--radio-container > div > label {
-    font-family: 'HelveticaNeue Condensed', 'Helvetica Neue', sans-serif;
-    font-weight: lighter;
-    text-transform: uppercase;
-    font-size: 20px;
-    vertical-align: middle;
-    background-color: rgba(255, 255, 255, .5);
-    border: 1px solid white;
-    padding: 14px;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    display: inline-block;
-    box-sizing: border-box;
+  font-family: "HelveticaNeue Condensed", "Helvetica Neue", sans-serif;
+  font-weight: lighter;
+  text-transform: uppercase;
+  font-size: 20px;
+  vertical-align: middle;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid white;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .input--radio-container > div:nth-child(2) > label {
-    border-right-color: transparent;
+  border-right-color: transparent;
 }
 
 .input--radio-container > div:first-child > label {
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-    border-right-color: transparent;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  border-right-color: transparent;
 }
 
 .input--radio-container > div:last-child > label {
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-    border-right-color: white;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  border-right-color: white;
 }
 
-.input--radio-item--red > input:checked+label {
-    background-color: var(--color-bg-red) !important;
-    border: 4px solid var(--color-border--red) !important;
-    color: var(--color-text--red) !important;
+.input--radio-item--red > input:checked + label {
+  background-color: var(--color-bg-red) !important;
+  border: 4px solid var(--color-border--red) !important;
+  color: var(--color-text--red) !important;
 }
 
-.input--radio-item--yellow > input:checked+label {
-    background-color: var(--color-bg-yellow) !important;
-    border: 4px solid var(--color-border--yellow) !important;
-    color: var(--color-text--yellow) !important;
+.input--radio-item--yellow > input:checked + label {
+  background-color: var(--color-bg-yellow) !important;
+  border: 4px solid var(--color-border--yellow) !important;
+  color: var(--color-text--yellow) !important;
 }
 
-.input--radio-item--green > input:checked+label {
-    background-color: var(--color-bg-green) !important;
-    border: 4px solid var(--color-border--green) !important;
-    color: var(--color-text--green) !important;
+.input--radio-item--green > input:checked + label {
+  background-color: var(--color-bg-green) !important;
+  border: 4px solid var(--color-border--green) !important;
+  color: var(--color-text--green) !important;
 }

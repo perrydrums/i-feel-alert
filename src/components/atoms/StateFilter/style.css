@@ -1,46 +1,46 @@
 .state-filter {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .state-filter-button {
-    border: 2px solid var(--color-bg);
-    width: 32px;
-    height: 32px;
-    border-radius: 24px;
-    margin: 0 4px;
+  border: 2px solid var(--color-bg);
+  width: 32px;
+  height: 32px;
+  border-radius: 24px;
+  margin: 0 4px;
 }
 
 .state-filter-button--red {
-    background-color: #9E2B25;
+  background-color: #9e2b25;
 }
 
 .state-filter-button--yellow {
-    background-color: #E2C044;
+  background-color: #e2c044;
 }
 
 .state-filter-button--green {
-    background-color: #009067;
+  background-color: #009067;
 }
 
 .state-filter-button--all {
-    background: conic-gradient(
-            from 0deg at 50% 50%,
-            var(--color-bg-green) 0%,
-            var(--color-bg-red) 10%,
-            var(--color-bg-red) 35%,
-            var(--color-bg-yellow) 45%,
-            var(--color-bg-yellow) 65%,
-            var(--color-bg-green) 80%,
-            var(--color-bg-green) 100%
-    );
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    var(--color-bg-green) 0%,
+    var(--color-bg-red) 10%,
+    var(--color-bg-red) 35%,
+    var(--color-bg-yellow) 45%,
+    var(--color-bg-yellow) 65%,
+    var(--color-bg-green) 80%,
+    var(--color-bg-green) 100%
+  );
 }
 
 .state-filter-button:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .state-filter--selected {
-    border: 2px solid white;
+  border: 2px solid white;
 }

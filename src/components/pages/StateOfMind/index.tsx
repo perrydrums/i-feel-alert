@@ -1,28 +1,35 @@
-import React, {useRef} from 'react';
-import {supabase} from '../../../helpers/client';
-import './style.css';
-import '../style.css';
-import Text from '../../atoms/text';
+import React, { useRef } from "react";
+import { supabase } from "../../../helpers/client";
+import "./style.css";
+import "../style.css";
+import Text from "../../atoms/text";
 import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Button from "../../atoms/Button";
-import {getActions, getSignals, getStateOfUser, getSupporting} from "../../../helpers/get";
+import {
+  getActions,
+  getSignals,
+  getStateOfUser,
+  getSupporting,
+} from "../../../helpers/get";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
 import Toolbar from "../../molecules/Toolbar";
-import {LinkCircleButton} from "../../atoms/CircleButton";
-import {Advice, User} from "../../../helpers/types";
-import {useUserContext} from "../../../context/User";
-import {Helmet} from 'react-helmet';
+import { LinkCircleButton } from "../../atoms/CircleButton";
+import { Advice, User } from "../../../helpers/types";
+import { useUserContext } from "../../../context/User";
+import { Helmet } from "react-helmet";
 import Gear from "../../atoms/svg/Gear";
-import {email} from "../../../helpers/notify";
+import { email } from "../../../helpers/notify";
 import Loading from "../../atoms/Loading";
 
 export default function StateOfMind() {
   const [loading, setLoading] = React.useState(true);
   const user = useUserContext();
-  const [stateOfMind, _setStateOfMind] = React.useState(localStorage.getItem('lastStateOfMind') || 'unknown');
-  const [show, setShow] = React.useState('all');
+  const [stateOfMind, _setStateOfMind] = React.useState(
+    localStorage.getItem("lastStateOfMind") || "unknown"
+  );
+  const [show, setShow] = React.useState("all");
   const [sharer, setSharer] = React.useState<User>();
   const [actions, setActions] = React.useState([] as Advice[]);
   const [signals, setSignals] = React.useState([] as Advice[]);
@@ -30,39 +37,48 @@ export default function StateOfMind() {
   const howToHelpRef = useRef<null | HTMLDivElement>(null);
   const scroll = () => {
     if (howToHelpRef && howToHelpRef.current) {
-      howToHelpRef.current.scrollIntoView()
+      howToHelpRef.current.scrollIntoView();
     }
   };
 
   const setStateOfMind = (state: string) => {
     _setStateOfMind(state);
-    localStorage.setItem('lastStateOfMind', state);
-  }
+    localStorage.setItem("lastStateOfMind", state);
+  };
 
   React.useEffect(() => {
     const addListener = (sharer: User) => {
       supabase
-        .channel('public:user_state')
-        .on('postgres_changes', {event: 'UPDATE', schema: 'public', table: 'user_state'}, payload => {
-          if (payload.new.user_id === sharer.id) {
-            setStateOfMind(payload.new.state);
+        .channel("public:user_state")
+        .on(
+          "postgres_changes",
+          { event: "UPDATE", schema: "public", table: "user_state" },
+          (payload) => {
+            if (payload.new.user_id === sharer.id) {
+              setStateOfMind(payload.new.state);
+            }
           }
-        })
+        )
         .subscribe();
-    }
+    };
 
     const getStateOfMind = async (user: User) => {
-      const sharer = user.type === 'sharer' ? user : await getSupporting(user.id);
+      const sharer =
+        user.type === "sharer" ? user : await getSupporting(user.id);
       if (sharer) {
         const state = await getStateOfUser(sharer.id);
         setStateOfMind(state);
         setSharer(sharer);
         addListener(sharer);
-        setActions(await getActions(user.id, {state, internal: user.type === 'sharer'}))
-        setSignals(await getSignals(user.id, {state, internal: user.type === 'sharer'}))
+        setActions(
+          await getActions(user.id, { state, internal: user.type === "sharer" })
+        );
+        setSignals(
+          await getSignals(user.id, { state, internal: user.type === "sharer" })
+        );
       }
       setLoading(false);
-    }
+    };
 
     if (user) {
       getStateOfMind(user);
@@ -72,14 +88,14 @@ export default function StateOfMind() {
   async function updateStateOfUser(state: string) {
     if (user) {
       await supabase
-        .from('user_state')
-        .update({state: state})
-        .eq('user_id', user.id);
+        .from("user_state")
+        .update({ state: state })
+        .eq("user_id", user.id);
 
       setStateOfMind(state);
 
       // Only send email if the state is decreased.
-      if (state === 'red' || (state === 'yellow' && stateOfMind === 'green')) {
+      if (state === "red" || (state === "yellow" && stateOfMind === "green")) {
         email(user.id, state);
       }
     }
@@ -87,80 +103,93 @@ export default function StateOfMind() {
 
   const actionButtonText = () => {
     switch (true) {
-      case stateOfMind === 'green':
-        return 'Keep this up!';
-      case user?.type === 'sharer':
-        return 'What can I do?';
-      case user?.type === 'listener':
-        return 'How can I help?';
+      case stateOfMind === "green":
+        return "Keep this up!";
+      case user?.type === "sharer":
+        return "What can I do?";
+      case user?.type === "listener":
+        return "How can I help?";
       default:
-        return 'How can I help?';
+        return "How can I help?";
     }
   };
 
   return (
     <>
       <Helmet>
-        <body className={stateOfMind} ></body>
+        <body className={stateOfMind}></body>
       </Helmet>
-      <Toolbar title={`Welcome, ${user?.name}`}
-               button={<LinkCircleButton state={stateOfMind} to="/me"><Gear/></LinkCircleButton>}
+      <Toolbar
+        title={`Welcome, ${user?.name}`}
+        button={
+          <LinkCircleButton state={stateOfMind} to="/me">
+            <Gear />
+          </LinkCircleButton>
+        }
       />
       <div className="page">
-        {loading
-          ? <div style={{marginTop: '150px'}}>
-              <Loading small={true} themed={true} />
-            </div>
-          : <>
-            {sharer
-              ? <>
+        {loading ? (
+          <div style={{ marginTop: "150px" }}>
+            <Loading small={true} themed={true} />
+          </div>
+        ) : (
+          <>
+            {sharer ? (
+              <>
                 <div className="som-title-container">
-                  {user?.type === 'sharer'
-                    ? <Title theme={stateOfMind}>I'm feeling</Title>
-                    : <>
-                      <Text theme={stateOfMind}>{sharer?.name || <>&nbsp;</>}</Text>
+                  {user?.type === "sharer" ? (
+                    <Title theme={stateOfMind}>I'm feeling</Title>
+                  ) : (
+                    <>
+                      <Text theme={stateOfMind}>
+                        {sharer?.name || <>&nbsp;</>}
+                      </Text>
                       <Title theme={stateOfMind}>currently feels</Title>
                     </>
-                  }
+                  )}
                 </div>
-                <StateIndicator state={stateOfMind}
-                                update={user?.type === 'sharer' ? updateStateOfUser : null}
+                <StateIndicator
+                  state={stateOfMind}
+                  update={user?.type === "sharer" ? updateStateOfUser : null}
                 />
-                {(show === 'all' || show === 'signs') &&
-                  <Button state={stateOfMind}
-                          text={actionButtonText()}
-                          pulse={true}
-                          onClick={async () => {
-                            await setShow('actions');
-                            scroll();
-                          }}
+                {(show === "all" || show === "signs") && (
+                  <Button
+                    state={stateOfMind}
+                    text={actionButtonText()}
+                    pulse={true}
+                    onClick={async () => {
+                      await setShow("actions");
+                      scroll();
+                    }}
                   />
-                }
-                {(show === 'all' || show === 'actions') &&
-                  <Button state={stateOfMind}
-                          text="What are the signs?"
-                          pulse={true}
-                          onClick={async () => {
-                            await setShow('signs');
-                            scroll();
-                          }}
+                )}
+                {(show === "all" || show === "actions") && (
+                  <Button
+                    state={stateOfMind}
+                    text="What are the signs?"
+                    pulse={true}
+                    onClick={async () => {
+                      await setShow("signs");
+                      scroll();
+                    }}
                   />
-                }
-                {show === 'actions' &&
+                )}
+                {show === "actions" && (
                   <div ref={howToHelpRef}>
-                    <HowToHelp items={actions} state={stateOfMind}/>
+                    <HowToHelp items={actions} state={stateOfMind} />
                   </div>
-                }
-                {show === 'signs' &&
+                )}
+                {show === "signs" && (
                   <div ref={howToHelpRef}>
-                    <WhatAreTheSigns items={signals} state={stateOfMind}/>
+                    <WhatAreTheSigns items={signals} state={stateOfMind} />
                   </div>
-                }
+                )}
               </>
-              : <>You are not supporting someone right now.</>
-            }
+            ) : (
+              <>You are not supporting someone right now.</>
+            )}
           </>
-        }
+        )}
       </div>
     </>
   );

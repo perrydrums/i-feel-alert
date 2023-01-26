@@ -1,35 +1,35 @@
 .circle-button {
-    display: block;
-    width: 48px;
-    height: 48px;
-    background-color: rgba(255, 255, 255, .1);
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
-    text-align: center;
-    padding: 0;
+  display: block;
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  text-align: center;
+  padding: 0;
 }
 
 .circle-button--icon {
-    font-size: 36px;
-    width: 42px;
-    height: 42px;
-    border: none;
-    background: none;
-    text-align: right;
+  font-size: 36px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: none;
+  text-align: right;
 }
 
 .arrow-button {
-    margin: 10px auto;
+  margin: 10px auto;
 }
 
 .hide {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 .state-indicator-title {
-    font-size: 80px;
-    text-transform: uppercase;
-    font-family: 'HelveticaNeue-CondensedBold', 'Helvetica Neue', sans-serif;
-    color: var(--color-text);
+  font-size: 80px;
+  text-transform: uppercase;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
+  color: var(--color-text);
 }

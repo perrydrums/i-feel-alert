@@ -1,45 +1,45 @@
 div.share-link-container {
-    margin: 8px 0 24px 0;
+  margin: 8px 0 24px 0;
 }
 
 pre.share-link {
-    overflow-x: scroll;
-    padding: 10px 14px;
-    border: 1px solid var(--color-text--white);
-    border-radius: var(--border-radius);
-    margin: 16px 0;
-    background-color: var(--color-text--light-gray);
-    color: var(--color-text);
-    font-size: 16px;
+  overflow-x: scroll;
+  padding: 10px 14px;
+  border: 1px solid var(--color-text--white);
+  border-radius: var(--border-radius);
+  margin: 16px 0;
+  background-color: var(--color-text--light-gray);
+  color: var(--color-text);
+  font-size: 16px;
 }
 
 span.share-link-copied {
-    color: var(--color-text--green);
+  color: var(--color-text--green);
 }
 
 span.share-link-copied.fade-out {
-    opacity: 0;
-    transition: opacity 1s ease;
-    transition-delay: 2s;
+  opacity: 0;
+  transition: opacity 1s ease;
+  transition-delay: 2s;
 }
 
 div.supporter-item {
-    padding: 10px 13px;
-    border: 1px solid var(--color-text--white);
-    border-radius: var(--border-radius);
-    margin: 8px 0 16px 0;
-    font-size: 18px;
-    background-color: var(--color-text--light-gray);
-    color: var(--color-text);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  padding: 10px 13px;
+  border: 1px solid var(--color-text--white);
+  border-radius: var(--border-radius);
+  margin: 8px 0 16px 0;
+  font-size: 18px;
+  background-color: var(--color-text--light-gray);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 div.supporter-item b {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 div.supporter-item small {
-    margin-left: 1px;
+  margin-left: 1px;
 }

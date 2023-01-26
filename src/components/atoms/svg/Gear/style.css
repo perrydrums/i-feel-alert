@@ -4,5 +4,5 @@
 }
 
 .gear-icon > g > path {
-    fill: var(--color-toolbar-content);
+  fill: var(--color-toolbar-content);
 }

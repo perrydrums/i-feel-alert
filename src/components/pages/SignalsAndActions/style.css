@@ -1,19 +1,19 @@
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text--white);
+  background-color: var(--color-bg);
+  color: var(--color-text--white);
 }
 
 .item-preview {
-    width: 100%;
-    border-radius: 20px;
-    margin: 10px 0;
-    padding: 10px 16px;
-    box-sizing: border-box;
+  width: 100%;
+  border-radius: 20px;
+  margin: 10px 0;
+  padding: 10px 16px;
+  box-sizing: border-box;
 }
 
 .saa-header-with-filter {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

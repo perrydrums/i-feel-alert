@@ -1,16 +1,24 @@
-import React from 'react';
-import './style.css';
+import React from "react";
+import "./style.css";
 
 export default function Gear() {
   return (
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-         width="635.000000pt" height="635.000000pt" viewBox="0 0 635.000000 635.000000"
-         preserveAspectRatio="xMidYMid meet"
-         className="gear-icon"
+    <svg
+      version="1.0"
+      xmlns="http://www.w3.org/2000/svg"
+      width="635.000000pt"
+      height="635.000000pt"
+      viewBox="0 0 635.000000 635.000000"
+      preserveAspectRatio="xMidYMid meet"
+      className="gear-icon"
     >
-      <g transform="translate(0.000000,635.000000) scale(0.100000,-0.100000)"
-         fill="#000000" stroke="none">
-        <path d="M2996 6199 c-82 -5 -151 -11 -154 -14 -3 -2 -31 -136 -63 -297 -33
+      <g
+        transform="translate(0.000000,635.000000) scale(0.100000,-0.100000)"
+        fill="#000000"
+        stroke="none"
+      >
+        <path
+          d="M2996 6199 c-82 -5 -151 -11 -154 -14 -3 -2 -31 -136 -63 -297 -33
                 -161 -61 -300 -64 -309 -4 -13 -33 -24 -103 -40 -100 -22 -309 -90 -396 -128
                 l-49 -22 -31 29 c-199 188 -420 381 -429 375 -63 -37 -187 -122 -251 -171
                 -103 -80 -286 -241 -286 -252 0 -5 41 -98 91 -207 50 -109 104 -226 119 -259
@@ -40,7 +48,8 @@ export default function Gear() {
                 -24 -503 -24 -630 0 -400 75 -733 268 -1013 588 -276 315 -413 689 -412 1127
                 1 493 168 890 519 1240 338 337 732 500 1211 502 104 0 211 -5 265 -13z"
         />
-        <path d="M3045 3824 c-115 -24 -226 -85 -315 -173 -141 -139 -197 -285 -187
+        <path
+          d="M3045 3824 c-115 -24 -226 -85 -315 -173 -141 -139 -197 -285 -187
                 -486 7 -153 49 -263 143 -376 80 -97 212 -182 334 -214 72 -19 248 -19 320 0
                 222 59 414 252 465 467 21 91 19 229 -5 323 -83 323 -420 528 -755 459z"
         />

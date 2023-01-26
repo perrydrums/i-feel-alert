@@ -1,20 +1,22 @@
-import React from 'react';
-import StateOfMind from './components/pages/StateOfMind';
-import './App.css';
-import './components/variables.css';
+import React from "react";
+import StateOfMind from "./components/pages/StateOfMind";
+import "./App.css";
+import "./components/variables.css";
 import {
-  BrowserRouter as Router, Navigate,
-  Route, Routes,
-} from 'react-router-dom';
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import SignalsAndActions from "./components/pages/SignalsAndActions";
-import {getCurrentUser} from "./helpers/auth";
+import { getCurrentUser } from "./helpers/auth";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Profile from "./components/pages/Profile";
 import Supporters from "./components/pages/Supporters";
 import OfferSupport from "./components/pages/OfferSupport";
-import {UserContext} from "./context/User";
-import {User} from "./helpers/types";
+import { UserContext } from "./context/User";
+import { User } from "./helpers/types";
 import Loading from "./components/atoms/Loading";
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    getCurrentUser().then(user => {
+    getCurrentUser().then((user) => {
       setUser(user);
       setLoading(false);
     });
@@ -30,27 +32,29 @@ function App() {
 
   return !loading ? (
     <Router>
-        {user ? (
-          <UserContext.Provider value={user}>
-            <Routes>
-              <Route path="/me/signs" element={<SignalsAndActions />}/>
-              <Route path="/me/supporters" element={<Supporters />}/>
-              <Route path="/me" element={<Profile />}/>
-              <Route path="/support/:sharerUserId" element={<OfferSupport />}/>
-              <Route path="/" element={<StateOfMind />}/>
-              <Route path="*" element={<Navigate to="/" />} />
-            </Routes>
-          </UserContext.Provider>
-        ) : (
+      {user ? (
+        <UserContext.Provider value={user}>
           <Routes>
-            <Route path="/register" element={<Register />}/>
-            <Route path="/support/:sharerUserId" element={<OfferSupport />}/>
-            <Route path="/" element={<Login />}/>
-            <Route path="*" element={<></>} />
+            <Route path="/me/signs" element={<SignalsAndActions />} />
+            <Route path="/me/supporters" element={<Supporters />} />
+            <Route path="/me" element={<Profile />} />
+            <Route path="/support/:sharerUserId" element={<OfferSupport />} />
+            <Route path="/" element={<StateOfMind />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
-        )}
+        </UserContext.Provider>
+      ) : (
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/support/:sharerUserId" element={<OfferSupport />} />
+          <Route path="/" element={<Login />} />
+          <Route path="*" element={<></>} />
+        </Routes>
+      )}
     </Router>
-  ) : <Loading />;
+  ) : (
+    <Loading />
+  );
 }
 
 export default App;

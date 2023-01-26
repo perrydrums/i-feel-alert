@@ -74,7 +74,11 @@ export default function StateOfMind() {
         .eq('user_id', user.id);
 
       setStateOfMind(state);
-      email(user.id);
+
+      // Only send email if the state is decreased.
+      if (state === 'red' || (state === 'yellow' && stateOfMind === 'green')) {
+        email(user.id, state);
+      }
     }
   }
 

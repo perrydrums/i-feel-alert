@@ -1,23 +1,30 @@
 import {ServerClient} from 'postmark'
 import { HandlerEvent, HandlerContext } from "@netlify/functions";
+import {User} from "../../src/helpers/types";
 
 const client = new ServerClient(process.env.REACT_APP_POSTMARK_TOKEN || '')
 const handler = async (event: HandlerEvent, context: HandlerContext) => {
   if (event.headers.referer?.includes('ifeel-alert.netlify.app')) {
-    const emailAddresses = JSON.parse(event.body || '').emailAddresses;
-    const user = JSON.parse(event.body || '').user;
-    if (emailAddresses && user) {
-      const actions = emailAddresses.map((emailAddress: string) => {
+    const supporters: [User] = JSON.parse(event.body || '').supporters;
+    const sharer: User = JSON.parse(event.body || '').sharer;
+    const state: string = JSON.parse(event.body || '').state;
+
+    if (supporters && sharer && state) {
+      const actions = supporters.map((supporter) => {
         return {
-          To: emailAddress,
-          Subject: `iFeel Alert: ${user.name} needs your support`,
+          To: supporter.email,
           From: 'info@perryjanssen.nl',
-          HtmlBody: `Hi, ${user.name} needs your support. Please visit https://ifeel-alert.netlify.app/ to see what you can do.`,
-          TextBody: `Hi, ${user.name} needs your support. Please visit https://ifeel-alert.netlify.app/ to see what you can do.`,
+          TemplateAlias: `mood-${state}`,
+          TemplateModel: {
+            supporterName: supporter.name,
+            sharerName: sharer.name,
+            company_name: 'ifeel/ALERT',
+            product_name: 'ifeel/ALERT',
+          },
         };
       });
 
-      const response = await client.sendEmailBatch(actions);
+      const response = await client.sendEmailBatchWithTemplates(actions);
       return {
         statusCode: 200,
         body: JSON.stringify(response),

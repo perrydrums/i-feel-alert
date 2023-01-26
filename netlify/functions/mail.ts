@@ -3,7 +3,7 @@ import { HandlerEvent, HandlerContext } from "@netlify/functions";
 
 const client = new ServerClient(process.env.REACT_APP_POSTMARK_TOKEN || '')
 const handler = async (event: HandlerEvent, context: HandlerContext) => {
-  if (event.headers.referrer?.includes('ifeel-alert.netlify.app')) {
+  if (event.headers.referer?.includes('ifeel-alert.netlify.app')) {
     const emailAddresses = JSON.parse(event.body || '').emailAddresses;
     const user = JSON.parse(event.body || '').user;
     if (emailAddresses && user) {

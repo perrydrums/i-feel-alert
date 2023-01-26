@@ -13,7 +13,7 @@ import Text from "../../atoms/text";
 import { supabase } from "../../../helpers/client";
 import { useUserContext } from "../../../context/User";
 import Gear from "../../atoms/svg/Gear";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Supporters() {
   const user = useUserContext();

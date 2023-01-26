@@ -18,6 +18,7 @@ import OfferSupport from "./components/pages/OfferSupport";
 import { UserContext } from "./context/User";
 import { User } from "./helpers/types";
 import Loading from "./components/atoms/Loading";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   const [user, setUser] = React.useState<User | null>();
@@ -31,27 +32,29 @@ function App() {
   }, []);
 
   return !loading ? (
-    <Router>
-      {user ? (
-        <UserContext.Provider value={user}>
+    <HelmetProvider>
+      <Router>
+        {user ? (
+          <UserContext.Provider value={user}>
+            <Routes>
+              <Route path="/me/signs" element={<SignalsAndActions />} />
+              <Route path="/me/supporters" element={<Supporters />} />
+              <Route path="/me" element={<Profile />} />
+              <Route path="/support/:sharerUserId" element={<OfferSupport />} />
+              <Route path="/" element={<StateOfMind />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </UserContext.Provider>
+        ) : (
           <Routes>
-            <Route path="/me/signs" element={<SignalsAndActions />} />
-            <Route path="/me/supporters" element={<Supporters />} />
-            <Route path="/me" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/support/:sharerUserId" element={<OfferSupport />} />
-            <Route path="/" element={<StateOfMind />} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/" element={<Login />} />
+            <Route path="*" element={<></>} />
           </Routes>
-        </UserContext.Provider>
-      ) : (
-        <Routes>
-          <Route path="/register" element={<Register />} />
-          <Route path="/support/:sharerUserId" element={<OfferSupport />} />
-          <Route path="/" element={<Login />} />
-          <Route path="*" element={<></>} />
-        </Routes>
-      )}
-    </Router>
+        )}
+      </Router>
+    </HelmetProvider>
   ) : (
     <Loading />
   );

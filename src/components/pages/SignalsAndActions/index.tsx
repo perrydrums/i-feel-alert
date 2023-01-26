@@ -14,7 +14,7 @@ import AdviceItem from "../../molecules/AdviceItem";
 import { supabase } from "../../../helpers/client";
 import Loading from "../../atoms/Loading";
 import Gear from "../../atoms/svg/Gear";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function SignalsAndActions() {
   const user = useUserContext();

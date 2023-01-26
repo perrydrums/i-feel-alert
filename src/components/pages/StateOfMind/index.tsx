@@ -18,7 +18,7 @@ import Toolbar from "../../molecules/Toolbar";
 import { LinkCircleButton } from "../../atoms/CircleButton";
 import { Advice, User } from "../../../helpers/types";
 import { useUserContext } from "../../../context/User";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Gear from "../../atoms/svg/Gear";
 import { email } from "../../../helpers/notify";
 import Loading from "../../atoms/Loading";

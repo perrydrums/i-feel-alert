@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../../organisms/forms/LoginForm";
 import ButtonLink from "../../atoms/Button/ButtonLink";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Loading from "../../atoms/Loading";
 
 export default function Login() {

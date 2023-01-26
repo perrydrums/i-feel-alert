@@ -6,7 +6,7 @@ import Button from "../../atoms/Button";
 import { logout } from "../../../helpers/auth";
 import { LinkCircleButton } from "../../atoms/CircleButton";
 import { useUserContext } from "../../../context/User";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 export default function Profile() {
   const user = useUserContext();

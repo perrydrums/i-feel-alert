@@ -1,24 +1,25 @@
 import React from "react";
-import StateOfMind from "./components/pages/StateOfMind";
-import "./App.css";
-import "./components/variables.css";
+import { HelmetProvider } from "react-helmet-async";
 import {
-  BrowserRouter as Router,
   Navigate,
   Route,
+  BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import SignalsAndActions from "./components/pages/SignalsAndActions";
-import { getCurrentUser } from "./helpers/auth";
-import Login from "./components/pages/Login";
-import Register from "./components/pages/Register";
-import Profile from "./components/pages/Profile";
-import Supporters from "./components/pages/Supporters";
-import OfferSupport from "./components/pages/OfferSupport";
-import { UserContext } from "./context/User";
-import { User } from "./helpers/types";
+
+import "./App.css";
 import Loading from "./components/atoms/Loading";
-import { HelmetProvider } from "react-helmet-async";
+import Login from "./components/pages/Login";
+import OfferSupport from "./components/pages/OfferSupport";
+import Profile from "./components/pages/Profile";
+import Register from "./components/pages/Register";
+import SignalsAndActions from "./components/pages/SignalsAndActions";
+import StateOfMind from "./components/pages/StateOfMind";
+import Supporters from "./components/pages/Supporters";
+import "./components/variables.css";
+import { UserContext } from "./context/User";
+import { getCurrentUser } from "./helpers/auth";
+import { User } from "./helpers/types";
 
 function App() {
   const [user, setUser] = React.useState<User | null>();

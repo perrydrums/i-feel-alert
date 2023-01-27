@@ -1,6 +1,7 @@
 import React from "react";
-import StateIndicatorCircles from "../../atoms/StateIndicatorCircles";
+
 import { ArrowButton } from "../../atoms/CircleButton";
+import StateIndicatorCircles from "../../atoms/StateIndicatorCircles";
 
 export default function StateIndicator({
   state,

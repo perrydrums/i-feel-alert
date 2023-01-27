@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+
 import { Database } from "../../lib/database.types";
 
 const supabaseUrl = process.env.REACT_APP_SUPABASE_URL || "";

@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import "../style.css";
 import { useParams } from "react-router-dom";
+
 import { getUserById } from "../../../helpers/get";
 import { User } from "../../../helpers/types";
-import RegisterForm from "../../organisms/forms/RegisterForm";
 import LoginForm from "../../organisms/forms/LoginForm";
+import RegisterForm from "../../organisms/forms/RegisterForm";
+import "../style.css";
 
 export default function OfferSupport() {
   const { sharerUserId } = useParams();

@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
-import "./style.css";
 import { Link } from "react-router-dom";
+
+import "./style.css";
 
 export function CircleButton({
   state = "default",

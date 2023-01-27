@@ -1,11 +1,12 @@
 import React from "react";
-import TextField from "../../../atoms/inputs/TextField";
-import Submit from "../../../atoms/inputs/Submit";
-import "./style.css";
+
 import { register } from "../../../../helpers/auth";
-import Title from "../../../atoms/text/Title";
-import Button from "../../../atoms/Button";
 import { supabase } from "../../../../helpers/client";
+import Button from "../../../atoms/Button";
+import Submit from "../../../atoms/inputs/Submit";
+import TextField from "../../../atoms/inputs/TextField";
+import Title from "../../../atoms/text/Title";
+import "./style.css";
 
 export default function RegisterForm({
   type,

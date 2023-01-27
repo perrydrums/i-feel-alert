@@ -1,19 +1,20 @@
 import React from "react";
-import "./style.css";
-import "../style.css";
-import Toolbar from "../../molecules/Toolbar";
-import Title from "../../atoms/text/Title";
-import { CircleButton, LinkCircleButton } from "../../atoms/CircleButton";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Helmet } from "react-helmet-async";
+
+import { useUserContext } from "../../../context/User";
+import { supabase } from "../../../helpers/client";
 import { getSupporters } from "../../../helpers/get";
 import { User } from "../../../helpers/types";
 import Button from "../../atoms/Button";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import Subtitle from "../../atoms/text/Subtitle";
-import Text from "../../atoms/text";
-import { supabase } from "../../../helpers/client";
-import { useUserContext } from "../../../context/User";
+import { CircleButton, LinkCircleButton } from "../../atoms/CircleButton";
 import Gear from "../../atoms/svg/Gear";
-import { Helmet } from "react-helmet-async";
+import Text from "../../atoms/text";
+import Subtitle from "../../atoms/text/Subtitle";
+import Title from "../../atoms/text/Title";
+import Toolbar from "../../molecules/Toolbar";
+import "../style.css";
+import "./style.css";
 
 export default function Supporters() {
   const user = useUserContext();

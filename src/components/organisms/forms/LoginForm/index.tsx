@@ -1,10 +1,11 @@
 import React from "react";
-import TextField from "../../../atoms/inputs/TextField";
-import Submit from "../../../atoms/inputs/Submit";
-import "./style.css";
+
 import { login } from "../../../../helpers/auth";
-import Password from "../../../atoms/inputs/Password";
 import { supabase } from "../../../../helpers/client";
+import Password from "../../../atoms/inputs/Password";
+import Submit from "../../../atoms/inputs/Submit";
+import TextField from "../../../atoms/inputs/TextField";
+import "./style.css";
 
 export default function LoginForm({ shareUserId }: { shareUserId?: string }) {
   const [email, setEmail] = React.useState("");

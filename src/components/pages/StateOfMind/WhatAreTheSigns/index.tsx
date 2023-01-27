@@ -1,8 +1,9 @@
 import React from "react";
-import Subtitle from "../../../atoms/text/Subtitle";
+
 import { Advice } from "../../../../helpers/types";
-import "./style.css";
+import Subtitle from "../../../atoms/text/Subtitle";
 import AdviceItem from "../../../molecules/AdviceItem";
+import "./style.css";
 
 export default function WhatAreTheSigns({
   items,

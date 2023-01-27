@@ -1,10 +1,11 @@
 import React from "react";
-import Radio from "../../../atoms/inputs/Radio";
-import TextArea from "../../../atoms/inputs/TextArea";
-import Submit from "../../../atoms/inputs/Submit";
-import { supabase } from "../../../../helpers/client";
-import "./style.css";
+
 import { getCurrentUser } from "../../../../helpers/auth";
+import { supabase } from "../../../../helpers/client";
+import Radio from "../../../atoms/inputs/Radio";
+import Submit from "../../../atoms/inputs/Submit";
+import TextArea from "../../../atoms/inputs/TextArea";
+import "./style.css";
 
 export default function NewSignOrActionForm() {
   const [type, setType] = React.useState("");

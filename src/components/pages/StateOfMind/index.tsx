@@ -1,27 +1,28 @@
 import React, { useRef } from "react";
+import { Helmet } from "react-helmet-async";
+
+import { useUserContext } from "../../../context/User";
 import { supabase } from "../../../helpers/client";
-import "./style.css";
-import "../style.css";
-import Text from "../../atoms/text";
-import Title from "../../atoms/text/Title";
-import StateIndicator from "../../molecules/StateIndicator";
-import Button from "../../atoms/Button";
 import {
   getActions,
   getSignals,
   getStateOfUser,
   getSupporting,
 } from "../../../helpers/get";
+import { email } from "../../../helpers/notify";
+import { Advice, User } from "../../../helpers/types";
+import Button from "../../atoms/Button";
+import { LinkCircleButton } from "../../atoms/CircleButton";
+import Loading from "../../atoms/Loading";
+import Gear from "../../atoms/svg/Gear";
+import Text from "../../atoms/text";
+import Title from "../../atoms/text/Title";
+import StateIndicator from "../../molecules/StateIndicator";
+import Toolbar from "../../molecules/Toolbar";
+import "../style.css";
 import HowToHelp from "./HowToHelp";
 import WhatAreTheSigns from "./WhatAreTheSigns";
-import Toolbar from "../../molecules/Toolbar";
-import { LinkCircleButton } from "../../atoms/CircleButton";
-import { Advice, User } from "../../../helpers/types";
-import { useUserContext } from "../../../context/User";
-import { Helmet } from "react-helmet-async";
-import Gear from "../../atoms/svg/Gear";
-import { email } from "../../../helpers/notify";
-import Loading from "../../atoms/Loading";
+import "./style.css";
 
 export default function StateOfMind() {
   const [loading, setLoading] = React.useState(true);

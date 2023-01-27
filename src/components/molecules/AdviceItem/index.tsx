@@ -1,7 +1,8 @@
 import React from "react";
+
 import { Advice } from "../../../helpers/types";
-import "./style.css";
 import { CircleButton } from "../../atoms/CircleButton";
+import "./style.css";
 
 export default function AdviceItem({
   advice,

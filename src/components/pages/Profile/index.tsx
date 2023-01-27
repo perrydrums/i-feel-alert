@@ -1,12 +1,13 @@
 import React from "react";
-import "../style.css";
-import Toolbar from "../../molecules/Toolbar";
-import ButtonLink from "../../atoms/Button/ButtonLink";
-import Button from "../../atoms/Button";
-import { logout } from "../../../helpers/auth";
-import { LinkCircleButton } from "../../atoms/CircleButton";
-import { useUserContext } from "../../../context/User";
 import { Helmet } from "react-helmet-async";
+
+import { useUserContext } from "../../../context/User";
+import { logout } from "../../../helpers/auth";
+import Button from "../../atoms/Button";
+import ButtonLink from "../../atoms/Button/ButtonLink";
+import { LinkCircleButton } from "../../atoms/CircleButton";
+import Toolbar from "../../molecules/Toolbar";
+import "../style.css";
 
 export default function Profile() {
   const user = useUserContext();

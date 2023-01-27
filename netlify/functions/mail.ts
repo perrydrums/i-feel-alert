@@ -1,5 +1,6 @@
+import { HandlerContext, HandlerEvent } from "@netlify/functions";
 import { ServerClient } from "postmark";
-import { HandlerEvent, HandlerContext } from "@netlify/functions";
+
 import { User } from "../../src/helpers/types";
 
 const client = new ServerClient(process.env.REACT_APP_POSTMARK_TOKEN || "");

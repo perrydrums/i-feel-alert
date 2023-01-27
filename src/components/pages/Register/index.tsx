@@ -1,7 +1,8 @@
 import React from "react";
-import "../style.css";
-import RegisterForm from "../../organisms/forms/RegisterForm";
+
 import Toolbar from "../../molecules/Toolbar";
+import RegisterForm from "../../organisms/forms/RegisterForm";
+import "../style.css";
 
 export default function Register() {
   return (

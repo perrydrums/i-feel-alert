@@ -1,7 +1,8 @@
-import { supabase } from "./client";
-import sha256 from "crypto-js/sha256";
-import { User } from "./types";
 import { User as SupabaseUser } from "@supabase/supabase-js";
+import sha256 from "crypto-js/sha256";
+
+import { supabase } from "./client";
+import { User } from "./types";
 
 export async function isLoggedIn() {
   const {

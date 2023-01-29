@@ -72,10 +72,10 @@ export default function StateOfMind() {
         setSharer(sharer);
         addListener(sharer);
         setActions(
-          await getActions(user.id, { state, internal: user.type === "sharer" })
+          await getActions(user.id, { internal: user.type === "sharer" })
         );
         setSignals(
-          await getSignals(user.id, { state, internal: user.type === "sharer" })
+          await getSignals(user.id, { internal: user.type === "sharer" })
         );
       }
       setLoading(false);
@@ -84,7 +84,7 @@ export default function StateOfMind() {
     if (user) {
       getStateOfMind(user);
     }
-  }, [user, stateOfMind]);
+  }, [user]);
 
   async function updateStateOfUser(state: string) {
     if (user) {
@@ -177,12 +177,22 @@ export default function StateOfMind() {
                 )}
                 {show === "actions" && (
                   <div ref={howToHelpRef}>
-                    <HowToHelp items={actions} state={stateOfMind} />
+                    <HowToHelp
+                      items={actions.filter(
+                        (action) => action.state === stateOfMind
+                      )}
+                      state={stateOfMind}
+                    />
                   </div>
                 )}
                 {show === "signs" && (
                   <div ref={howToHelpRef}>
-                    <WhatAreTheSigns items={signals} state={stateOfMind} />
+                    <WhatAreTheSigns
+                      items={signals.filter(
+                        (signal) => signal.state === stateOfMind
+                      )}
+                      state={stateOfMind}
+                    />
                   </div>
                 )}
               </>

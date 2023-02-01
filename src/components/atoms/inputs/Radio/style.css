@@ -1,7 +1,7 @@
 .input--radio-container {
   display: flex;
   width: 100%;
-  margin-bottom: 42px;
+  margin-bottom: 10px;
   align-items: stretch;
 }
 
@@ -26,7 +26,7 @@
   text-transform: uppercase;
   font-size: 20px;
   vertical-align: middle;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
   border: 1px solid white;
   padding: 14px;
   text-align: center;

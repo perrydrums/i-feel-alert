@@ -8,6 +8,7 @@ import { getSupporters } from "../../../helpers/get";
 import { User } from "../../../helpers/types";
 import Button from "../../atoms/Button";
 import { CircleButton, LinkCircleButton } from "../../atoms/CircleButton";
+import QRCodeOverlay from "../../atoms/QRCodeOverlay";
 import Gear from "../../atoms/svg/Gear";
 import Text from "../../atoms/text";
 import Subtitle from "../../atoms/text/Subtitle";
@@ -22,6 +23,7 @@ export default function Supporters() {
   const [loading, setLoading] = React.useState(true);
   const [shareApiAvailable, setShareApiAvailable] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
+  const [showOverlay, setShowOverlay] = React.useState(false);
   const shareLink = user ? `${window.location.origin}/support/${user?.id}` : "";
 
   React.useEffect(() => {
@@ -94,6 +96,7 @@ export default function Supporters() {
           {shareApiAvailable && (
             <Button text="Ask for support" onClick={shareSupportLink} />
           )}
+          <Button text="Show QR code" onClick={() => setShowOverlay(true)} />
           <Text>
             {shareApiAvailable ? "Or send" : "Send"} this link to someone you'd
             like to get support from:
@@ -125,6 +128,12 @@ export default function Supporters() {
             <li>Get notified when you update your state of mind</li>
           </ul>
         </div>
+        {showOverlay && (
+          <QRCodeOverlay
+            value={shareLink}
+            closeFunction={() => setShowOverlay(false)}
+          />
+        )}
       </div>
     </>
   );

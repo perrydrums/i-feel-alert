@@ -12,7 +12,7 @@ export default function Toolbar({
 }) {
   return (
     <div className="toolbar">
-      <p className="toolbar--name">{title}</p>
+      <p className="toolbar--title">{title}</p>
       <div className="toolbar--button">{button || ""}</div>
     </div>
   );

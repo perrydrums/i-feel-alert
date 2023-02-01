@@ -9,3 +9,21 @@
   background-color: var(--color-toolbar);
   color: var(--color-toolbar-content);
 }
+
+.toolbar--title:first-letter {
+  text-transform: uppercase;
+}
+
+.toolbar--button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--color-toolbar-content);
+  cursor: pointer;
+}

@@ -7,8 +7,13 @@
   border-radius: 35px;
   margin: 40px auto;
   cursor: pointer;
-  color: white;
   text-align: center;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  line-height: 65px;
+  text-shadow: 3px 3px 0 var(--color-shadow);
+  color: var(--color-button-text);
 }
 
 .button--animation {
@@ -18,13 +23,13 @@
   animation-timing-function: ease-out;
 }
 
-.button--text {
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
-  font-size: 32px;
-  text-transform: uppercase;
-  line-height: 65px;
-  text-shadow: 3px 3px 0 var(--color-shadow);
-  color: var(--color-button-text);
+.button--small {
+  display: inline-block;
+  margin: 10px 0;
+  height: 50px;
+  border-radius: 25px;
+  line-height: 45px;
+  font-size: 16px;
 }
 
 @keyframes pulse {

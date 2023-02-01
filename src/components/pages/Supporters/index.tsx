@@ -23,6 +23,7 @@ export default function Supporters() {
   const [loading, setLoading] = React.useState(true);
   const [shareApiAvailable, setShareApiAvailable] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
+  const [showSupport, setShowSupport] = React.useState(false);
   const [showOverlay, setShowOverlay] = React.useState(false);
   const shareLink = user ? `${window.location.origin}/support/${user?.id}` : "";
 
@@ -93,10 +94,35 @@ export default function Supporters() {
       <div className="page">
         <Title>Supporters</Title>
         <div className="share-link-container">
-          {shareApiAvailable && (
-            <Button text="Ask for support" onClick={shareSupportLink} />
+          <Button
+            text="Ask for support"
+            onClick={() => setShowSupport(!showSupport)}
+          />
+          {showSupport && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "1rem",
+                marginTop: "-30px",
+              }}
+            >
+              <Button
+                text="Show QR code"
+                onClick={() => setShowOverlay(true)}
+                small={true}
+              />
+              {shareApiAvailable && (
+                <Button
+                  text="Share link"
+                  onClick={shareSupportLink}
+                  small={true}
+                />
+              )}
+            </div>
           )}
-          <Button text="Show QR code" onClick={() => setShowOverlay(true)} />
+
           <Text>
             {shareApiAvailable ? "Or send" : "Send"} this link to someone you'd
             like to get support from:

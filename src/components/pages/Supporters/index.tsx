@@ -7,12 +7,13 @@ import { supabase } from "../../../helpers/client";
 import { getSupporters } from "../../../helpers/get";
 import { User } from "../../../helpers/types";
 import Button from "../../atoms/Button";
+import ButtonContainer from "../../atoms/ButtonContainer";
 import { CircleButton, LinkCircleButton } from "../../atoms/CircleButton";
 import QRCodeOverlay from "../../atoms/QRCodeOverlay";
+import Text from "../../atoms/Text";
+import Subtitle from "../../atoms/Text/Subtitle";
+import Title from "../../atoms/Text/Title";
 import Gear from "../../atoms/svg/Gear";
-import Text from "../../atoms/text";
-import Subtitle from "../../atoms/text/Subtitle";
-import Title from "../../atoms/text/Title";
 import Toolbar from "../../molecules/Toolbar";
 import "../style.css";
 import "./style.css";
@@ -99,15 +100,7 @@ export default function Supporters() {
             onClick={() => setShowSupport(!showSupport)}
           />
           {showSupport && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                gap: "1rem",
-                marginTop: "-30px",
-              }}
-            >
+            <ButtonContainer style={{ marginTop: "-30px" }}>
               <Button
                 text="Show QR code"
                 onClick={() => setShowOverlay(true)}
@@ -120,7 +113,7 @@ export default function Supporters() {
                   small={true}
                 />
               )}
-            </div>
+            </ButtonContainer>
           )}
 
           <Text>

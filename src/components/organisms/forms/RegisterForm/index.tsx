@@ -3,9 +3,9 @@ import React from "react";
 import { register } from "../../../../helpers/auth";
 import { supabase } from "../../../../helpers/client";
 import Button from "../../../atoms/Button";
+import Title from "../../../atoms/Text/Title";
 import Submit from "../../../atoms/inputs/Submit";
 import TextField from "../../../atoms/inputs/TextField";
-import Title from "../../../atoms/text/Title";
 import "./style.css";
 
 export default function RegisterForm({

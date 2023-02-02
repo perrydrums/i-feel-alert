@@ -1,5 +1,6 @@
 body {
   background-color: var(--color-bg);
+  transition: background-color 1s ease, color 1s ease;
 }
 
 .som-title-container {

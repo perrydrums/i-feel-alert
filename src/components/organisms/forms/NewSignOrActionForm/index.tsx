@@ -7,8 +7,11 @@ import Submit from "../../../atoms/inputs/Submit";
 import TextArea from "../../../atoms/inputs/TextArea";
 import "./style.css";
 
-export default function NewSignOrActionForm() {
-  const [type, setType] = React.useState("");
+export default function NewSignOrActionForm({
+  type,
+}: {
+  type: "signal" | "action";
+}) {
   const [state, setState] = React.useState("");
   const [internal, setInternal] = React.useState(true);
   const [description, setDescription] = React.useState("");
@@ -30,13 +33,6 @@ export default function NewSignOrActionForm() {
 
   return (
     <form onSubmit={onSubmit} className="new-sign-or-action-form">
-      <Radio
-        options={["signal", "action"]}
-        name="type"
-        onChange={(value) => {
-          setType(value);
-        }}
-      />
       <Radio
         options={["red", "yellow", "green"]}
         name="state"

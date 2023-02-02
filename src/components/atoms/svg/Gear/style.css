@@ -5,4 +5,5 @@
 
 .gear-icon > g > path {
   fill: var(--color-toolbar-content);
+  transition: fill 1s ease;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import QRCode from "react-qr-code";
 
-import Text from "../../atoms/text";
+import Text from "../Text";
 import "./style.css";
 
 export default function QRCodeOverlay({

@@ -4,9 +4,11 @@
   align-items: center;
   width: 100%;
 }
+
 .state-indicator-circle {
   border: 5px solid rgba(0, 0, 0, 0);
   border-radius: 50%;
+  transition: border-color 1s ease;
 }
 
 .sic--outer {
@@ -16,6 +18,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-color: var(--color-border--25);
 }
 
 .sic--middle {
@@ -25,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-color: var(--color-border--50);
 }
 
 .sic--inner {
@@ -34,4 +38,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-color: var(--color-border);
+}
+
+.state-indicator-title {
+  font-size: 80px;
+  text-transform: uppercase;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
+  color: var(--color-text);
+  transition: color 1s ease-in;
 }

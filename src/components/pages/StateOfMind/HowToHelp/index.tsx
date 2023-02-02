@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Advice } from "../../../../helpers/types";
-import Subtitle from "../../../atoms/text/Subtitle";
+import Subtitle from "../../../atoms/Text/Subtitle";
 import AdviceItem from "../../../molecules/AdviceItem";
 import "./style.css";
 

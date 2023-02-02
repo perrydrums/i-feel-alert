@@ -1,31 +1,37 @@
 .theme--red {
   color: var(--color-text--red);
   border-color: var(--color-border--red);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--yellow {
   color: var(--color-text--yellow);
   border-color: var(--color-border--yellow);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--green {
   color: var(--color-text--green);
   border-color: var(--color-border--green);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--dark-red {
   color: var(--color-border--red);
   border-color: var(--color-border--red);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--dark-yellow {
   color: var(--color-border--yellow);
   border-color: var(--color-border--yellow);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--dark-green {
   color: var(--color-bg-green);
   border-color: var(--color-text--green);
+  transition: color 1s ease, border-color 1s ease;
 }
 
 .theme--dark-default {

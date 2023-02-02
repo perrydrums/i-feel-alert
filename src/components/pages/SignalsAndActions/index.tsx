@@ -6,12 +6,14 @@ import { supabase } from "../../../helpers/client";
 import { getActions, getSignals } from "../../../helpers/get";
 import { Advice } from "../../../helpers/types";
 import Button from "../../atoms/Button";
+import ButtonContainer from "../../atoms/ButtonContainer";
 import { LinkCircleButton } from "../../atoms/CircleButton";
 import Loading from "../../atoms/Loading";
 import StateFilter from "../../atoms/StateFilter";
+import Text from "../../atoms/Text";
+import MiniSubtitle from "../../atoms/Text/MiniSubtitle";
+import Subtitle from "../../atoms/Text/Subtitle";
 import Gear from "../../atoms/svg/Gear";
-import MiniSubtitle from "../../atoms/text/MiniSubtitle";
-import Subtitle from "../../atoms/text/Subtitle";
 import AdviceItem from "../../molecules/AdviceItem";
 import Toolbar from "../../molecules/Toolbar";
 import NewSignOrActionForm from "../../organisms/forms/NewSignOrActionForm";
@@ -20,7 +22,9 @@ import "./style.css";
 export default function SignalsAndActions() {
   const user = useUserContext();
   const [loading, setLoading] = React.useState(true);
-  const [showForm, setShowForm] = React.useState(false);
+  const [formType, _setFormType] = React.useState(
+    "" as "signal" | "action" | ""
+  );
   const [stateFilter, setStateFilter] = React.useState("all");
   const [signals, setSignals] = React.useState([] as Advice[]);
   const [actions, setActions] = React.useState([] as Advice[]);
@@ -36,6 +40,14 @@ export default function SignalsAndActions() {
       });
     }
   }, [user]);
+
+  function setFormType(type: "signal" | "action") {
+    if (formType === type) {
+      _setFormType("");
+    } else {
+      _setFormType(type);
+    }
+  }
 
   async function deleteFromDatabase(id: number, type: "signal" | "action") {
     await supabase.from(`${type}s`).delete().eq("id", id);
@@ -133,14 +145,21 @@ export default function SignalsAndActions() {
         }
       />
       <div className="page">
-        <div style={{ textAlign: "center" }}>
-          <h1>Signs & Actions</h1>
+        <h1>Signs & Actions</h1>
+        <Text>Here you can add your own signs and actions.</Text>
+        <ButtonContainer>
           <Button
-            text={showForm ? "cancel" : "new"}
-            onClick={() => setShowForm(!showForm)}
+            text={formType === "signal" ? "cancel" : "New Signal"}
+            onClick={() => setFormType("signal")}
+            small={true}
           />
-        </div>
-        {showForm && <NewSignOrActionForm />}
+          <Button
+            text={formType === "action" ? "cancel" : "New Action"}
+            onClick={() => setFormType("action")}
+            small={true}
+          />
+        </ButtonContainer>
+        {!!formType && <NewSignOrActionForm type={formType} />}
         <div>
           <div className="saa-header-with-filter">
             <Subtitle theme="default">Signals</Subtitle>

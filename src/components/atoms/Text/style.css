@@ -6,6 +6,7 @@ p {
 h1 {
   font-size: 54px;
   font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
+  margin-bottom: 12px;
 }
 
 h2 {

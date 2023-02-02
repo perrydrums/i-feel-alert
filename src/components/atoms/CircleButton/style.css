@@ -11,7 +11,7 @@
 }
 
 .circle-button--icon {
-  font-size: 40px;
+  font-size: 48px;
   line-height: 40px;
   width: 42px;
   height: 42px;
@@ -28,9 +28,3 @@
   visibility: hidden;
 }
 
-.state-indicator-title {
-  font-size: 80px;
-  text-transform: uppercase;
-  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", sans-serif;
-  color: var(--color-text);
-}

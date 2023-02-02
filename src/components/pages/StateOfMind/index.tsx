@@ -14,9 +14,9 @@ import { Advice, User } from "../../../helpers/types";
 import Button from "../../atoms/Button";
 import { LinkCircleButton } from "../../atoms/CircleButton";
 import Loading from "../../atoms/Loading";
+import Text from "../../atoms/Text";
+import Title from "../../atoms/Text/Title";
 import Gear from "../../atoms/svg/Gear";
-import Text from "../../atoms/text";
-import Title from "../../atoms/text/Title";
 import StateIndicator from "../../molecules/StateIndicator";
 import Toolbar from "../../molecules/Toolbar";
 import "../style.css";
@@ -88,12 +88,12 @@ export default function StateOfMind() {
 
   async function updateStateOfUser(state: string) {
     if (user) {
+      setStateOfMind(state);
+
       await supabase
         .from("user_state")
         .update({ state: state })
         .eq("user_id", user.id);
-
-      setStateOfMind(state);
 
       // Only send email if the state is decreased.
       if (state === "red" || (state === "yellow" && stateOfMind === "green")) {
@@ -142,9 +142,7 @@ export default function StateOfMind() {
                     <Title theme={stateOfMind}>I'm feeling</Title>
                   ) : (
                     <>
-                      <Text theme={stateOfMind}>
-                        {sharer?.name || <>&nbsp;</>}
-                      </Text>
+                      <Text>{sharer?.name || <>&nbsp;</>}</Text>
                       <Title theme={stateOfMind}>currently feels</Title>
                     </>
                   )}
@@ -158,6 +156,7 @@ export default function StateOfMind() {
                     state={stateOfMind}
                     text={actionButtonText()}
                     pulse={true}
+                    rounded={true}
                     onClick={async () => {
                       await setShow("actions");
                       scroll();
@@ -169,6 +168,7 @@ export default function StateOfMind() {
                     state={stateOfMind}
                     text="What are the signs?"
                     pulse={true}
+                    rounded={true}
                     onClick={async () => {
                       await setShow("signs");
                       scroll();

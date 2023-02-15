@@ -10,7 +10,10 @@ export default function ButtonContainer({
   style?: React.CSSProperties;
 }) {
   return (
-    <div className="button-container" style={style}>
+    <div
+      className="button-container button-container--reveal-animation"
+      style={style}
+    >
       {children}
     </div>
   );

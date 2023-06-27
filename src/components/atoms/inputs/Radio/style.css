@@ -26,7 +26,8 @@
   font-size: 20px;
   vertical-align: middle;
   background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
   padding: 14px;
   text-align: center;
   cursor: pointer;
@@ -35,18 +36,18 @@
   box-sizing: border-box;
 }
 
-.input--radio-container > div:nth-child(2) > label {
-  border-right-color: transparent;
+.input--radio-container > div > label:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .input--radio-container > div:first-child > label {
   border-radius: var(--border-radius) 0 0 var(--border-radius);
-  border-right-color: transparent;
+  border-left: 1px solid white;
 }
 
 .input--radio-container > div:last-child > label {
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  border-right-color: white;
+  border-right: 1px solid white;
 }
 
 .input--radio-item--red > input:checked + label {

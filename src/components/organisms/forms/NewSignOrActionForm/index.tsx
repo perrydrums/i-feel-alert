@@ -66,7 +66,7 @@ export default function NewSignOrActionForm({
           setDescription(value);
         }}
       />
-      <Submit name="Submit" />
+      <Submit name={`Add ${type}`} />
     </form>
   );
 }

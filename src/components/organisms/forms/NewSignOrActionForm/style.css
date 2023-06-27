@@ -1,9 +1,12 @@
 .new-sign-or-action-form {
-  animation: reveal .6s linear;
+  animation: fade-in .5s linear;
+  animation-delay: .3s;
+  animation-fill-mode: forwards;
+  opacity: 0;
   height: auto;
   max-height: 0;
   margin-bottom: 0;
-  transition: max-height .5s linear, margin-bottom .5s linear;
+  transition: max-height .5s ease, margin-bottom .5s ease;
 }
 
 .new-sign-or-action-form.open {

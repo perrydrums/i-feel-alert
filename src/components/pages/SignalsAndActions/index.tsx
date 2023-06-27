@@ -49,6 +49,11 @@ export default function SignalsAndActions() {
     }
   }
 
+  function closeForm() {
+    _setFormType("");
+    window.location.reload();
+  }
+
   async function deleteFromDatabase(id: number, type: "signal" | "action") {
     await supabase.from(`${type}s`).delete().eq("id", id);
 
@@ -159,7 +164,9 @@ export default function SignalsAndActions() {
             small={true}
           />
         </ButtonContainer>
-        {!!formType && <NewSignOrActionForm type={formType} />}
+        {!!formType && (
+          <NewSignOrActionForm type={formType} onClose={closeForm} />
+        )}
         <div>
           <div className="saa-header-with-filter">
             <Subtitle theme="default">Signals</Subtitle>

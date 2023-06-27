@@ -9,8 +9,10 @@ import "./style.css";
 
 export default function NewSignOrActionForm({
   type,
+  onClose,
 }: {
   type: "signal" | "action";
+  onClose: () => void;
 }) {
   const [className, setClassName] = React.useState("new-sign-or-action-form");
   const [state, setState] = React.useState("");
@@ -36,6 +38,8 @@ export default function NewSignOrActionForm({
         internal,
         description,
       });
+
+      onClose();
     }
   };
 

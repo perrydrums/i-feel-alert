@@ -53,7 +53,7 @@ export default function RegisterForm({
       />
     </div>
   ) : (
-    <form onSubmit={onSubmit} className="new-sign-or-action-form">
+    <form onSubmit={onSubmit} className="register-form">
       <TextField
         name="email"
         onChange={(value) => {

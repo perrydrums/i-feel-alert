@@ -12,9 +12,17 @@ export default function NewSignOrActionForm({
 }: {
   type: "signal" | "action";
 }) {
+  const [className, setClassName] = React.useState("new-sign-or-action-form");
   const [state, setState] = React.useState("");
   const [internal, setInternal] = React.useState(true);
   const [description, setDescription] = React.useState("");
+
+  // Add "open" to className after .5s
+  React.useEffect(() => {
+    setTimeout(() => {
+      setClassName("new-sign-or-action-form open");
+    }, 0);
+  }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,7 +40,7 @@ export default function NewSignOrActionForm({
   };
 
   return (
-    <form onSubmit={onSubmit} className="new-sign-or-action-form">
+    <form onSubmit={onSubmit} className={className}>
       <Radio
         options={["red", "yellow", "green"]}
         name="state"

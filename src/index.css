@@ -18,3 +18,8 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+@font-face {
+  font-family: "Helvetica-Condensed";
+  src: url("./fonts/HelveticaNeue-Condensed.otf");
+}

@@ -1,2 +1,12 @@
 .new-sign-or-action-form {
+  animation: reveal .6s linear;
+  height: auto;
+  max-height: 0;
+  margin-bottom: 0;
+  transition: max-height .5s linear, margin-bottom .5s linear;
+}
+
+.new-sign-or-action-form.open {
+  max-height: 300px;
+  margin-bottom: 12px;
 }

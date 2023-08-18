@@ -25,10 +25,10 @@ const handler = async (event: HandlerEvent, context: HandlerContext) => {
         };
       });
 
-      const response = await client.sendEmailBatchWithTemplates(actions);
+      // const response = await client.sendEmailBatchWithTemplates(actions);
       return {
         statusCode: 200,
-        body: JSON.stringify(response),
+        body: JSON.stringify({'aaa': 'aaa'}),
       };
     } else {
       return {

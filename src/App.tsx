@@ -34,6 +34,8 @@ function App() {
 
     OneSignal.init({
       appId: "57507296-ef2e-4355-990a-9f0b84790626",
+    }).then(async () => {
+      await OneSignal.login("12345");
     });
   }, []);
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
+import OneSignal from "react-onesignal";
 import {
   Navigate,
   Route,
@@ -29,6 +30,10 @@ function App() {
     getCurrentUser().then((user) => {
       setUser(user);
       setLoading(false);
+    });
+
+    OneSignal.init({
+      appId: "57507296-ef2e-4355-990a-9f0b84790626",
     });
   }, []);
 

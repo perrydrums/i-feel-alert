@@ -29,13 +29,16 @@ function App() {
   React.useEffect(() => {
     getCurrentUser().then((user) => {
       setUser(user);
-      setLoading(false);
-    });
 
-    OneSignal.init({
-      appId: "57507296-ef2e-4355-990a-9f0b84790626",
-    }).then(async () => {
-      await OneSignal.login("12345");
+      OneSignal.init({
+        appId: "57507296-ef2e-4355-990a-9f0b84790626",
+      }).then(async () => {
+        if (user) {
+          OneSignal.login(user.id);
+        }
+      });
+
+      setLoading(false);
     });
   }, []);
 

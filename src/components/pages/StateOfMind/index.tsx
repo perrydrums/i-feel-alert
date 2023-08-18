@@ -9,7 +9,7 @@ import {
   getStateOfUser,
   getSupporting,
 } from "../../../helpers/get";
-import { push } from "../../../helpers/notify";
+import { email, push } from "../../../helpers/notify";
 import { Advice, User } from "../../../helpers/types";
 import Button from "../../atoms/Button";
 import { LinkCircleButton } from "../../atoms/CircleButton";
@@ -97,7 +97,7 @@ export default function StateOfMind() {
 
       // Only send push notification if the state is decreased.
       if (state === "red" || (state === "yellow" && stateOfMind === "green")) {
-        // email(user.id, state);
+        email(user.id, state);
         push(user.id, state);
       }
     }

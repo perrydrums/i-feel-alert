@@ -27,7 +27,7 @@ export const handler: Handler = async (event, context) => {
   notification.app_id = appId;
   // notification.include_external_user_ids = receivers;
   notification.include_external_user_ids = [
-    "f70e1753-b0d1-48e7-a9f8-b7e8b4835a60",
+    "fc262e69-c8a5-401f-b4c6-31fd961e42b8",
   ];
   notification.headings = {
     en: "ALERT!",
